@@ -9,6 +9,7 @@ namespace GameLendXchange.Classes
 {
     public class Booking
     {
+        public int IdBooking { get; set; }
         public DateTime BookingDate { get; set; }
         public Player Player { get; set; }
         public VideoGame VideoGame { get; set; }

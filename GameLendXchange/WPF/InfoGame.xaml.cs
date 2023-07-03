@@ -1,6 +1,6 @@
-﻿using System;
+﻿using GameLendXchange.Classes;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,21 +17,14 @@ using System.Windows.Shapes;
 namespace GameLendXchange.WPF
 {
     /// <summary>
-    /// Logique d'interaction pour Login.xaml
+    /// Logique d'interaction pour InfoGame.xaml
     /// </summary>
-    public partial class Login : Page
+    public partial class InfoGame : Page
     {
-        private String connectionString;
-        public Login()
+        public InfoGame(VideoGame selectedGame)
         {
             InitializeComponent();
-            connectionString = ConfigurationManager.ConnectionStrings["XchangeDB"].ConnectionString;
         }
 
-        private void backBtn_Click(object sender, RoutedEventArgs e)
-        {
-            
-            NavigationService.Navigate(new MainWindow());
-        }
     }
 }

@@ -9,6 +9,7 @@ namespace GameLendXchange.Classes
 {
     public class Copy
     {
+        public int IdCopy { get; set; }
         public Player Owner { get; set; }
         public List<Loan> Loans { get; set; }
         public VideoGame VideoGame { get; set; }
