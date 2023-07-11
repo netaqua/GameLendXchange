@@ -5,6 +5,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace GameLendXchange.Classes.ViewModel
 {
@@ -33,11 +36,12 @@ namespace GameLendXchange.Classes.ViewModel
             }
         }
 
-        public HomePageViewModel()
+        public void HomePageViewModel()
         {
             // Initialisez les données nécessaires pour la page d'accueil
             LoadCurrentPlayer();
             LoadGameList();
+            
         }
 
         private void LoadCurrentPlayer()

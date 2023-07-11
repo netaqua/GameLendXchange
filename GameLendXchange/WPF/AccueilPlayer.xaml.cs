@@ -32,5 +32,20 @@ namespace GameLendXchange.WPF
         {
             NavigationService.Navigate(new MainWindow());
         }
+
+        private void LocationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainWindow());
+        }
+
+        private void ReservationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainWindow());
+        }
+
+        private void EditPlayerButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
