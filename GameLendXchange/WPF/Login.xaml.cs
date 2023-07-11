@@ -33,5 +33,10 @@ namespace GameLendXchange.WPF
             
             NavigationService.Navigate(new MainWindow());
         }
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

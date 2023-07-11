@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GameLendXchange.WPF;
 using GameLendXchange.Classes;
+using GameLendXchange;
 
 namespace GameLendXchange
 {
@@ -25,7 +26,7 @@ namespace GameLendXchange
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Login());
+           
 
 
 
@@ -70,6 +71,7 @@ namespace GameLendXchange
 
         private void registerBtn_Click(object sender, RoutedEventArgs e)
         {
+           //MainFrame.Navigate(new Registration());
             MainFrame.Navigate(new Registration());
         }
 

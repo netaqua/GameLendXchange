@@ -8,46 +8,52 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Frame 
-        Name="MainFrame"
-        Margin="2"
-        Background="#86c598"
-        NavigationUIVisibility="Hidden"/>
+            Name="MainFrame"
+            Margin="2"
+            Background="#86c598"
+            NavigationUIVisibility="Hidden"/>
 
-        <Rectangle HorizontalAlignment="Center" Height="73" Stroke="Black" Opacity="2" VerticalAlignment="Top" Width="816">
-            <Rectangle.Fill>
-                <SolidColorBrush Color="#f4f6ef" />
-            </Rectangle.Fill>
-        </Rectangle>
+        <Grid>
+            <!-- Rectangle -->
+            <Rectangle HorizontalAlignment="Stretch" Height="71" Stroke="Black" Opacity="2" VerticalAlignment="Top" Width="1800">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="#f4f6ef" />
+                </Rectangle.Fill>
+            </Rectangle>
 
+            <!-- Boutons -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button x:Name="loginBtn"  Content="Connexion" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62"  HorizontalAlignment="Left" Height="37" Margin="600,15,0,0" VerticalAlignment="Top" Width="83" Click="loginBtn_Click"/>
-            <Button x:Name="registerBtn" Content="Inscription" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" HorizontalAlignment="Left" Height="37" Margin="20,15,0,0" VerticalAlignment="Top" Width="76" Click="registerBtn_Click"/>
-        </StackPanel>
+                <Button x:Name="loginBtn" Content="Connexion" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" HorizontalAlignment="Right" Height="37" Margin="0,19,10,0" VerticalAlignment="Top" Width="76" Click="loginBtn_Click" Grid.Column="2" />
+                <Button x:Name="registerBtn" Content="Inscription" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" HorizontalAlignment="Right" Height="37" Margin="0,19,105,0" VerticalAlignment="Top" Width="76" Click="registerBtn_Click" Grid.Column="2" />
+            </Grid>
 
+            <!-- Autres éléments -->
+            <Image HorizontalAlignment="Left" Source="/Pictures/Logo_nom_slogan.png" Height="69" Margin="3,2,0,0" VerticalAlignment="Top" Width="176"/>
+            <DataGrid Name="dgGame" AutoGenerateColumns="True" Margin="114,94,37,48" ColumnWidth="*" SelectionChanged="dgGame_SelectionChanged"/>
 
-        <Image HorizontalAlignment="Left" Source="Pictures\Logo_nom_slogan.png" Height="69" Margin="10,2,0,0" VerticalAlignment="Top" Width="176"/>
-        <DataGrid Name="dgGame" AutoGenerateColumns="True" Margin="114,94,37,48" ColumnWidth="*" SelectionChanged="dgGame_SelectionChanged"/>
-        <!--ColumnWidth for use datagrid on the full size-->
+            <Rectangle HorizontalAlignment="Left" Height="292" Margin="44,94,0,0" Stroke="Black" VerticalAlignment="Top" Width="70">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="#698C6E" />
+                </Rectangle.Fill>
+            </Rectangle>
 
-
-        <Rectangle HorizontalAlignment="Left" Height="292" Margin="44,94,0,0" Stroke="Black" VerticalAlignment="Top" Width="70">
-            <Rectangle.Fill>
-                <SolidColorBrush Color="#698C6E" />
-            </Rectangle.Fill>
-        </Rectangle>
-
-        <StackPanel Margin="44,95,687,50" >
-            <Button Name="Playstation"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="71" Click="Button_Click">
-                <Image Source="Pictures\playstation.png" Height="100"/>
-            </Button>
-            <Button Name="XBOX"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="70" Click="Button_Click">
-                <Image Source="Pictures\xbox.png" Height="95"/>
-            </Button>
-            <Button Name="NINTENDO"  Background="#698C6E" BorderBrush="Black" Height="97" Width="70" Click="Button_Click">
-                <Image Source="Pictures\nintendo.png" Height="96" Width="70" />
-            </Button>
-        </StackPanel>
-
+            <StackPanel Margin="44,95,687,50">
+                <Button Name="Playstation"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="71" Click="Button_Click">
+                    <Image Source="Pictures\playstation.png" Height="100"/>
+                </Button>
+                <Button Name="XBOX"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="70" Click="Button_Click">
+                    <Image Source="Pictures\xbox.png" Height="95"/>
+                </Button>
+                <Button Name="NINTENDO"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="70" Click="Button_Click">
+                    <Image Source="Pictures\nintendo.png" Height="95" />
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
