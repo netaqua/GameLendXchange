@@ -38,7 +38,7 @@ namespace GameLendXchange.WPF
 
 
             // Rediriger l'utilisateur vers la page de connexion après l'enregistrement
-            NavigationService.Navigate(new Login());
+            //NavigationService.Navigate(new Login());
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
