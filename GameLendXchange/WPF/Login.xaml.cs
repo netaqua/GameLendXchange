@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GameLendXchange;
+using GameLendXchange.Classes;
 
 namespace GameLendXchange.WPF
 {
@@ -30,12 +34,86 @@ namespace GameLendXchange.WPF
 
         private void backBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MainWindow());
+            //NavigationService.Navigate(new MainWindow());
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Window.GetWindow(this).Close();
         }
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
+            string username = usernameBox.Text;
+            string password = passwordBox.Text;
 
+            // Vérifier les informations d'identification dans la base de données
+            bool isValid = VerifyCredentials(username, password);
+
+            if (isValid)
+            {
+                // Récupérer le joueur à partir de la base de données
+                Player player = GetPlayerFromDatabase(username);
+
+                if (player != null)
+                {
+                    // Passer le joueur à la page d'accueil du joueur
+                    AccueilPlayer accueilPlayerPage = new AccueilPlayer(player);
+                    NavigationService.Navigate(accueilPlayerPage);
+                }
+                else
+                {
+                    MessageBox.Show("Player introuvable !");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nom d'utilisateur ou mot de passe incorrect !");
+            }
+        }
+
+        private bool VerifyCredentials(string username, string password)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM dbo.Player WHERE Username = @Username AND Password = @Password";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", username);
+                command.Parameters.AddWithValue("@Password", password);
+
+                connection.Open();
+                int count = (int)command.ExecuteScalar();
+                return count > 0;
+            }
+        }
+
+        private Player GetPlayerFromDatabase(string username)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM dbo.Player WHERE Username = @Username";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", username);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Player player = new Player
+                    {
+                        IdUser = (int)reader["IdPlayer"],
+                        Username = (string)reader["Username"],
+                        Password = (string)reader["Password"],
+                        Pseudo = (string)reader["Pseudo"],
+                        Credit = (int)reader["Credit"],
+                        RegistrationDate = (DateTime)reader["RegistrationDate"],
+                        DateOfBirth = (DateTime)reader["DateOfBirth"],
+                };
+
+                    return player;
+                }
+
+                return null;
+            }
         }
     }
 }

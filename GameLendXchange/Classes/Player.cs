@@ -44,8 +44,9 @@ namespace GameLendXchange.Classes
         public bool Insert()
         {
             PlayerDB db = new PlayerDB();
-            return db.Insert(this);
+            return db.Create(this);
         }
+
 
     }
 }

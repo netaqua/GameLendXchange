@@ -24,7 +24,7 @@ namespace GameLendXchange.DAO
             Player p = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"SELECT * FROM dbo.player WHERE username='@Username' and password= '@Password", connection);
+                SqlCommand cmd = new SqlCommand($"SELECT * FROM dbo.player WHERE username=@Username and password=@Password", connection);
 
                 cmd.Parameters.AddWithValue("Username", playerUsername);
                 cmd.Parameters.AddWithValue("Password", passWord);
@@ -50,19 +50,36 @@ namespace GameLendXchange.DAO
         public bool Create(Player p)
         {
             bool success = false;
-            using (SqlConnection connection = new SqlConnection(connectionString)) // Pas oublier l'auto_incrementation dans la base de donnée pour l'ID
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"INSERT INTO dbo.player(credit, username, password, registrationDate, dateOfBirth, isAdmin) VALUES({p.Credit}, '{p.Username}', '{p.Password}', {p.RegistrationDate}, {p.DateOfBirth})", connection);
-                connection.Open();
-                int res = cmd.ExecuteNonQuery();
-                success = res > 0;
+                try
+                {
+                    SqlCommand cmd = new SqlCommand($"INSERT into dbo.Player(username,password,dateOfBirth, registrationDate,pseudo, credit) values ('{p.Username}','{p.Password}','{p.RegistrationDate:yyyy-MM-dd}', '{p.DateOfBirth:yyyy-MM-dd}','{p.Pseudo}',0)", connection); 
+                    connection.Open(); // permet d'exécuter une commande d'insert / update / delete
+                    int res = cmd.ExecuteNonQuery();
+                    success = res > 0;
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627) // Numéro d'erreur spécifique pour la violation de contrainte d'unicité
+                    {
+                        // Gérer ici le cas où le nom d'utilisateur est déjà présent
+                        // par exemple, afficher un message d'erreur ou effectuer une autre action appropriée
+                        Console.WriteLine("Le nom d'utilisateur ou le pseudo est déjà utilisé.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Une erreur SQL s'est produite : " + ex.Message);
+                    }
+                }
             }
+
             return success;
         }
 
         public Player Read(String playerUsername)
         {
-            Player p = null;
+            Player ?p = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand($"SELECT * FROM dbo.player WHERE username='@Username'", connection);
@@ -173,9 +190,9 @@ namespace GameLendXchange.DAO
              }
              return p;
          }
-        
 
-        public bool Insert(Player p)
+
+        /*public bool Insert(Player p)
         {
             bool success = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -187,6 +204,39 @@ namespace GameLendXchange.DAO
             }
 
             return success;
+        }*/
+
+        //Test d'un autre type de insert
+        public bool Insert(Player p)
+        {
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand($"INSERT into dbo.Player(username,password,dateOfBirth, registrationDate,pseudo, credit) values ('{p.Username}','{p.Password}','{p.DateOfBirth}','{p.RegistrationDate}','{p.Pseudo}','{p.Credit}')", connection);
+                    connection.Open(); // permet d'exécuter une commande d'insert / update / delete
+                    int res = cmd.ExecuteNonQuery();
+                    success = res > 0;
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627) // Numéro d'erreur spécifique pour la violation de contrainte d'unicité
+                    {
+                        // Gérer ici le cas où le nom d'utilisateur est déjà présent
+                        // par exemple, afficher un message d'erreur ou effectuer une autre action appropriée
+                        Console.WriteLine("Le nom d'utilisateur ou le pseudo est déjà utilisé.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Une erreur SQL s'est produite : " + ex.Message);
+                    }
+                }
+            }
+
+            return success;
         }
+
+
     }
 }

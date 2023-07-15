@@ -8,7 +8,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Registration" Background="#86c598">
 
+
+
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="5*"/>
@@ -39,5 +42,10 @@
         <DatePicker x:Name="dateOfBirthSelect" Grid.Column="1" HorizontalAlignment="Left" FontFamily="Arial" FontSize="17" Margin="250,184,0,0" Grid.Row="1" VerticalAlignment="Top" Width="209" Height="24" />
         <Button x:Name="backButton" Grid.Column="1" Content="Go Back" FontFamily="Georgia" FontSize="16" Background="GhostWhite" BorderBrush="#FBDA62" HorizontalAlignment="Left" Height="40" Margin="54,265,0,0" Grid.Row="1" VerticalAlignment="Top" Width="150" Click="BackButton_Click"/>
         <Button x:Name="registerButton" Grid.Column="1" Content="Register" FontFamily="Georgia" FontSize="16" Background="#FBDA62" BorderBrush="WhiteSmoke" FontWeight="Bold" HorizontalAlignment="Left" Height="40" Margin="280,265,0,0" Grid.Row="1" VerticalAlignment="Top" Width="150" Click="RegistrationBtn_Click"/>
+
+        <!-- Error Message -->
+        <TextBlock x:Name="errorMessage" Grid.Column="1" FontFamily="Georgia" FontSize="16" Foreground="Red" Margin="10,0,10,0" Grid.Row="2" VerticalAlignment="Top" Height="32"/>
+
     </Grid>
+
 </Page>

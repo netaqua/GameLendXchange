@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace GameLendXchange.WPF
 {
-    /// <summary>
-    /// Logique d'interaction pour Registration.xaml
-    /// </summary>
     public partial class Registration : Page
     {
         public Registration()
@@ -34,16 +31,41 @@ namespace GameLendXchange.WPF
             p.DateOfBirth = dateOfBirthSelect.SelectedDate.Value;
             p.Pseudo = pseudoTextBox.Text;
             p.RegistrationDate = DateTime.Now;
-            p.Insert();
 
+            bool success = p.Insert();
 
-            // Rediriger l'utilisateur vers la page de connexion après l'enregistrement
-            //NavigationService.Navigate(new Login());
+            if (success)
+            {
+                // Enregistrement réussi, vous pouvez rediriger l'utilisateur vers la page de connexion ou effectuer une autre action
+                NavigationService.Navigate(new Login());
+
+                // Effacer les champs de saisie
+                ClearFields();
+
+                // Effacer le message d'erreur
+                errorMessage.Text = string.Empty;
+            }
+            else
+            {
+                // Afficher un message d'erreur
+                errorMessage.Text = "Erreur lors de la création du joueur. Veuillez vérifier vos informations et réessayer.";
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MainWindow());
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Window.GetWindow(this).Close();
+        }
+
+        private void ClearFields()
+        {
+            // Effacer les champs de saisie
+            usernameTextBox.Text = string.Empty;
+            passwordTextBox.Password = string.Empty;
+            dateOfBirthSelect.SelectedDate = null;
+            pseudoTextBox.Text = string.Empty;
         }
 
     }

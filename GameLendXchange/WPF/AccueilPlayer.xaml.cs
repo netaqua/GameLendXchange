@@ -22,7 +22,7 @@ namespace GameLendXchange.WPF
     /// </summary>
     public partial class AccueilPlayer : Page
     {
-        public AccueilPlayer()
+        public AccueilPlayer(Player p)
         {
             InitializeComponent();
             DataContext = new AccueilPlayerViewModel();

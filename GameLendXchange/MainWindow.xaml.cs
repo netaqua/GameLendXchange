@@ -26,9 +26,12 @@ namespace GameLendXchange
         public MainWindow()
         {
             InitializeComponent();
+            ConfigureDataGridColumns();
+
+
         }
 
-        private void dgGame_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /*private void dgGame_SelectionChanged(object sender, SelectionChangedEventArgs e) CETTE FONCTION EST INUTILE EN VRAI UNE FOIS LA RECUPARATION DE TOUT LES JEUX. 
         {
             // Vérifiez s'il y a un élément sélectionné dans le DataGrid
             if (dgGame.SelectedItem != null)
@@ -40,7 +43,7 @@ namespace GameLendXchange
                 InfoGame destinationPage = new InfoGame(selectedGame);
                 MainFrame.Navigate(destinationPage);
             }
-        }
+        }*/
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -78,5 +81,41 @@ namespace GameLendXchange
             HomeGrid.Visibility = Visibility.Collapsed;
             ContentGrid.Visibility = Visibility.Visible;
         }
+
+        private void ConfigureDataGridColumns()
+        {
+            
+            dgGame.Columns.Clear(); // Efface toutes les colonnes existantes
+
+            // Colonne pour l'ID du jeu
+            DataGridTextColumn idColumn = new DataGridTextColumn();
+            idColumn.Header = "ID";
+            idColumn.Binding = new Binding("IdGame");
+            dgGame.Columns.Add(idColumn);
+
+            // Colonne pour le nom du jeu
+            DataGridTextColumn nameColumn = new DataGridTextColumn();
+            nameColumn.Header = "Nom du jeu";
+            nameColumn.Binding = new Binding("Name");
+            dgGame.Columns.Add(nameColumn);
+
+            // Colonne pour le coût en crédits
+            DataGridTextColumn creditCostColumn = new DataGridTextColumn();
+            creditCostColumn.Header = "Coût en crédits";
+            creditCostColumn.Binding = new Binding("CreditCost");
+            dgGame.Columns.Add(creditCostColumn);
+
+            // Colonne pour la console
+            DataGridTextColumn consoleColumn = new DataGridTextColumn();
+            consoleColumn.Header = "Console";
+            consoleColumn.Binding = new Binding("Console");
+            dgGame.Columns.Add(consoleColumn);
+
+            List<VideoGame> videoGames = VideoGame.GetGames();
+            dgGame.ItemsSource = videoGames;
+
+
+        }
+
     }
 }

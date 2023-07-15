@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameLendXchange"
         mc:Ignorable="d"
-        Title="MainWindow" MinWidth="800" MaxWidth="800" MinHeight="450" MaxHeight="450" ResizeMode="NoResize"
+        Title="MainWindow" MinWidth="1000" MaxWidth="1000" MinHeight="600" MaxHeight="600" ResizeMode="NoResize"
         SizeToContent="WidthAndHeight">
     <Grid>
         <Grid x:Name="HomeGrid">
@@ -29,24 +29,33 @@
             </Grid>
 
             <!-- Autres éléments -->
-            <Image HorizontalAlignment="Left" Source="/Pictures/Logo_nom_slogan.png" Height="69" Margin="3,2,0,0" VerticalAlignment="Top" Width="176"/>
-            <DataGrid Name="dgGame" AutoGenerateColumns="True" Margin="114,95,37,0" ColumnWidth="*" SelectionChanged="dgGame_SelectionChanged" VerticalAlignment="Top" Height="291"/>
+            <Image HorizontalAlignment="Left" Source="Pictures/Logo_nom_slogan.png" Height="59" Margin="10,6,0,0" VerticalAlignment="Top" Width="176"/>
+            <!--<DataGrid Name="dgGame" AutoGenerateColumns="True" Margin="114,95,37,0" ColumnWidth="*" VerticalAlignment="Top" Height="291"/>-->
 
-            <Rectangle HorizontalAlignment="Left" Height="292" Margin="44,94,0,0" Stroke="Black" VerticalAlignment="Top" Width="70">
+            <DataGrid Name="dgGame" AutoGenerateColumns="False" Margin="136,94,37,89" ColumnWidth="*">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding IdGame}" />
+                    <DataGridTextColumn Header="Nom du jeu" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Coût en crédits" Binding="{Binding CreditCost}" />
+                    <DataGridTextColumn Header="Console" Binding="{Binding Console}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Rectangle HorizontalAlignment="Left" Height="301" Margin="44,94,0,0" Stroke="Black" VerticalAlignment="Top" Width="92">
                 <Rectangle.Fill>
                     <SolidColorBrush Color="#698C6E" />
                 </Rectangle.Fill>
             </Rectangle>
 
-            <StackPanel Margin="44,95,687,50">
-                <Button Name="Playstation"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="71" Click="Button_Click">
-                    <Image Source="Pictures\playstation.png" Height="100"/>
+            <StackPanel Margin="44,95,764,89">
+                <Button Name="Playstation"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="92" Click="Button_Click">
+                    <Image Source="Pictures\playstation.png" Height="100" Width="89"/>
                 </Button>
-                <Button Name="XBOX"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="70" Click="Button_Click">
-                    <Image Source="Pictures\xbox.png" Height="95"/>
+                <Button Name="XBOX"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="92" Click="Button_Click">
+                    <Image Source="Pictures\xbox.png" Height="95" Width="89"/>
                 </Button>
-                <Button Name="NINTENDO"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Height="90" Width="70" Click="Button_Click">
-                    <Image Source="Pictures\nintendo.png" Height="80" RenderTransformOrigin="0.508,0.416" />
+                <Button Name="NINTENDO"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="92" Click="Button_Click">
+                    <Image Source="Pictures\nintendo.png" Height="99" RenderTransformOrigin="0.508,0.416" Width="89" />
                 </Button>
             </StackPanel>
         </Grid>
