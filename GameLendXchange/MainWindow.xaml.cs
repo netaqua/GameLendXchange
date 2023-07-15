@@ -26,10 +26,6 @@ namespace GameLendXchange
         public MainWindow()
         {
             InitializeComponent();
-           
-
-
-
         }
 
         private void dgGame_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,7 +45,7 @@ namespace GameLendXchange
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            // string buttonContent = button.Content.ToString(); utilisation du name plutot que du content car nous n'en avions pas defini
+            // string buttonContent = button.Content.ToString(); utilisation du name plutôt que du content car nous n'en avions pas défini
             string buttonContent = button.Name.ToString();
 
             switch (buttonContent)
@@ -71,13 +67,16 @@ namespace GameLendXchange
 
         private void registerBtn_Click(object sender, RoutedEventArgs e)
         {
-           //MainFrame.Navigate(new Registration());
             MainFrame.Navigate(new Registration());
+            HomeGrid.Visibility = Visibility.Collapsed;
+            ContentGrid.Visibility = Visibility.Visible;
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new Login());
+            HomeGrid.Visibility = Visibility.Collapsed;
+            ContentGrid.Visibility = Visibility.Visible;
         }
     }
 }

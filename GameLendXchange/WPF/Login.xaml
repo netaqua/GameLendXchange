@@ -6,9 +6,9 @@
       xmlns:local="clr-namespace:GameLendXchange.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Login" Background="#86c598">
+      Title="Login" Background="White">
 
-    <Grid>
+    <Grid Background="#86c598">
         <Grid.RowDefinitions>
             <RowDefinition Height="83*"/>
             <RowDefinition Height="29*"/>
@@ -22,29 +22,12 @@
 
         <!-- Upper section -->
 
-        <Border Background="#f4f6ef" Padding="30" Margin="357,-355,356,6" Grid.RowSpan="3" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
-            <Border.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="90.018"/>
-                    <!-- pour modifier la rotation de la border à l'horizontale-->
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Border.RenderTransform>
-            <StackPanel VerticalAlignment="Center" Margin="-23,0,-138,0" RenderTransformOrigin="0.5,0.5">
-                <StackPanel.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-89.243"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </StackPanel.RenderTransform>
-            </StackPanel>
-        </Border>
-
-
+        <!-- Rectangle -->
+        <Rectangle HorizontalAlignment="Stretch" Height="71" Stroke="Black" Opacity="2" VerticalAlignment="Top" Width="1800">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="#f4f6ef" />
+            </Rectangle.Fill>
+        </Rectangle>
 
         <Label Grid.Column="1" Content="Username" FontFamily="Georgia" FontSize="30" HorizontalAlignment="Left" Margin="54,54,0,0" Grid.Row="2" VerticalAlignment="Top"/>
         <Label Grid.Column="1" Content="Password" FontFamily="Georgia" FontSize="30" HorizontalAlignment="Left" Margin="54,157,0,0" Grid.Row="2" VerticalAlignment="Top"/>
@@ -53,7 +36,6 @@
         <Button x:Name="backBtn" Grid.Column="1" Content="Go Back" FontFamily="Verdana" FontSize="11" Background="GhostWhite" BorderBrush="#FBDA62" HorizontalAlignment="Left" Height="34" Margin="654,28,0,0" VerticalAlignment="Top" Width="114" Click="backBtn_Click"/>
         <Button x:Name="LoginBtn" Grid.Column="1" FontFamily="Verdana" FontSize="11" Background="#FBDA62" BorderBrush="WhiteSmoke" Content="Login" FontWeight="Black" HorizontalAlignment="Left" Margin="61,250,0,0" Grid.Row="2" VerticalAlignment="Top" Height="40" Width="492" Click="LoginBtn_Click"/>
         <Image Source="../Pictures\Logo_nom_slogan.png" Grid.ColumnSpan="2" Margin="-146,16,474,0" />
-        <TextBlock HorizontalAlignment="Center" Margin="0,22,0,21" FontFamily="Georgia" Text="It's time to log" TextAlignment="Center" FontWeight="SemiBold" FontSize="30" Foreground="Black" Width="218" Grid.Column="1"/>
-
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,22,0,21" FontFamily="Georgia" Text="It's time to log" TextAlignment="Center" FontWeight="SemiBold" FontSize="30" Foreground="Black" Width="233" Grid.Column="1"/>
     </Grid>
 </Page>

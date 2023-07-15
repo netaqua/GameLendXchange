@@ -30,7 +30,6 @@ namespace GameLendXchange.WPF
 
         private void backBtn_Click(object sender, RoutedEventArgs e)
         {
-            
             NavigationService.Navigate(new MainWindow());
         }
 
