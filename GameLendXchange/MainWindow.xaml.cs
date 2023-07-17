@@ -27,8 +27,6 @@ namespace GameLendXchange
         {
             InitializeComponent();
             ConfigureDataGridColumns();
-
-
         }
 
         /*private void dgGame_SelectionChanged(object sender, SelectionChangedEventArgs e) CETTE FONCTION EST INUTILE EN VRAI UNE FOIS LA RECUPARATION DE TOUT LES JEUX. 
@@ -44,6 +42,7 @@ namespace GameLendXchange
                 MainFrame.Navigate(destinationPage);
             }
         }*/
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

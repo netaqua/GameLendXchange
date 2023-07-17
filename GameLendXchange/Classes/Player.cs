@@ -47,6 +47,5 @@ namespace GameLendXchange.Classes
             return db.Create(this);
         }
 
-
     }
 }

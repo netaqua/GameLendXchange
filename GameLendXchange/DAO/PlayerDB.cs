@@ -104,7 +104,7 @@ namespace GameLendXchange.DAO
             return p;
         }
 
-        public bool Udpdate(Player p)
+        public bool Update(Player p)
         {
             bool success = false;
             using (SqlConnection connection = new SqlConnection(connectionString))

@@ -36,13 +36,10 @@ namespace GameLendXchange.WPF
 
             if (success)
             {
-                // Enregistrement réussi, vous pouvez rediriger l'utilisateur vers la page de connexion ou effectuer une autre action
                 NavigationService.Navigate(new Login());
 
-                // Effacer les champs de saisie
                 ClearFields();
 
-                // Effacer le message d'erreur
                 errorMessage.Text = string.Empty;
             }
             else
