@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Login" Background="White">
 
-    <Grid Background="#86c598" x:Name="LoginGrid">
+    <Grid Background="#86c598" x:Name="LoginGrid" Margin="0,0,-198,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="83*"/>
             <RowDefinition Height="29*"/>
@@ -24,19 +24,27 @@
         <!-- Upper section -->
 
         <!-- Rectangle -->
-        <Rectangle Height="91" Stroke="Black" Opacity="2" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,0,-13,0">
+        <Rectangle Height="91" Stroke="Black" Opacity="2" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,0,-2,0">
             <Rectangle.Fill>
                 <SolidColorBrush Color="#f4f6ef" />
             </Rectangle.Fill>
         </Rectangle>
 
-        <Label Grid.Column="1" Content="Username" FontFamily="Georgia" FontSize="30" HorizontalAlignment="Left" Margin="148,34,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Grid.Column="1" Content="Password" FontFamily="Georgia" FontSize="30" HorizontalAlignment="Left" Margin="148,137,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <TextBox x:Name="usernameBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="419,39,0,0" Grid.Row="2" FontSize="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="224"/>
-        <TextBox x:Name="passwordBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="419,142,0,0" Grid.Row="2" FontSize="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="224"/>
-        <Button x:Name="backBtn" Grid.Column="1" Content="Go Back" FontFamily="Verdana" FontSize="11" Background="GhostWhite" BorderBrush="#FBDA62" HorizontalAlignment="Left" Height="34" Margin="654,28,0,0" VerticalAlignment="Top" Width="114" Click="backBtn_Click"/>
-        <Button x:Name="LoginBtn" Grid.Column="1" FontFamily="Verdana" FontSize="11" Background="#FBDA62" BorderBrush="WhiteSmoke" Content="Login" FontWeight="Black" HorizontalAlignment="Left" Margin="136,248,0,0" Grid.Row="2" VerticalAlignment="Top" Height="40" Width="492" Click="LoginBtn_Click"/>
-        <Image Source="../Pictures\Logo_nom_slogan.png" Grid.ColumnSpan="2" Margin="-146,8,474,8" />
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,22,0,21" FontFamily="Georgia" Text="It's time to log" TextAlignment="Center" FontWeight="SemiBold" FontSize="30" Foreground="Black" Width="233" Grid.Column="1"/>
+        <Label Grid.Column="1" Content="Username" FontFamily="Georgia" FontSize="30" HorizontalAlignment="Left" Margin="40,75,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label Grid.Column="1" Content="Password" FontFamily="Georgia" FontSize="30" HorizontalAlignment="Left" Margin="40,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
+        <TextBox x:Name="usernameBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="205,78,0,0" Grid.Row="2" FontSize="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="224"/>
+        <TextBox x:Name="passwordBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="205,0,0,0" Grid.Row="2" FontSize="30" TextWrapping="Wrap" VerticalAlignment="Center" Width="224"/>
+        <Button x:Name="backBtn" Grid.Column="1" Content="Go Back" FontFamily="Verdana" FontSize="11" Background="GhostWhite" BorderBrush="#FBDA62" HorizontalAlignment="Left" Height="34" Margin="849,33,0,0" VerticalAlignment="Top" Width="114" Click="backBtn_Click"/>
+        <Button x:Name="LoginBtn" Grid.Column="1" FontFamily="Verdana" FontSize="11" Background="#FBDA62" BorderBrush="WhiteSmoke" Content="Login" FontWeight="Black" HorizontalAlignment="Left" Margin="37,284,0,0" Grid.Row="2" VerticalAlignment="Top" Height="40" Width="401" Click="LoginBtn_Click"/>
+        <Image Source="../Pictures\Logo_nom_slogan.png" Grid.ColumnSpan="2" Margin="-283,9,611,7" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="356,0,0,0" FontFamily="Georgia" Text="It's time to log" TextAlignment="Center" FontWeight="SemiBold" FontSize="30" Foreground="Black" Width="234" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Georgia" Text="Player Section" TextAlignment="Center" FontWeight="SemiBold" FontSize="30" Foreground="Black" Width="233" Grid.Column="1" Margin="114,3,0,0" Grid.Row="2"/>
+        <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="329" Margin="488,25,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="1" Grid.RowSpan="2"/>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Georgia" Text="Admin Section" TextAlignment="Center" FontWeight="SemiBold" FontSize="30" Foreground="Black" Width="233" Grid.Column="1" Margin="629,2,0,0" Grid.Row="2"/>
+        <TextBox x:Name="adminUsernameBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="711,77,0,0" Grid.Row="2" FontSize="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="224"/>
+        <TextBox x:Name="adminPasswordBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="711,186,0,0" Grid.Row="2" FontSize="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="224"/>
+        <Button x:Name="LoginBtnAdmin" Grid.Column="1" FontFamily="Verdana" FontSize="11" Background="#FBDA62" BorderBrush="WhiteSmoke" Content="Login" FontWeight="Black" HorizontalAlignment="Left" Margin="549,284,0,0" Grid.Row="2" VerticalAlignment="Top" Height="40" Width="396" Click="LoginBtnAdmin_Click"/>
+        <Label Grid.Column="1" Content="Username" FontFamily="Georgia" FontSize="30" HorizontalAlignment="Left" Margin="536,76,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label Grid.Column="1" Content="Password" FontFamily="Georgia" FontSize="30" HorizontalAlignment="Left" Margin="540,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
     </Grid>
 </Page>

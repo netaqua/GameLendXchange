@@ -40,6 +40,10 @@ namespace GameLendXchange.WPF
             Window.GetWindow(this).Close();
         }
 
+        //-----------------------------------------------------//
+        //------------------ LOGIN PLAYER --------------------//
+        //---------------------------------------------------//
+
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
             string username = usernameBox.Text;
@@ -110,6 +114,82 @@ namespace GameLendXchange.WPF
                 };
 
                     return player;
+                }
+
+                return null;
+            }
+        }
+
+        //-----------------------------------------------------//
+        //------------------ LOGIN ADMIN ---------------------//
+        //---------------------------------------------------//
+
+        private void LoginBtnAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            string username = adminUsernameBox.Text;
+            string password = adminPasswordBox.Text;
+
+            // Vérifier les informations d'identification dans la base de données
+            bool isValid = VerifyCredentialsAdmin(username, password);
+
+            if (isValid)
+            {
+                // Récupérer l'admin à partir de la base de données
+                Administrator admin = GetAdminFromDatabase(username);
+
+                if (admin != null)
+                {
+                    // Passer l'admin à la page d'accueil des admin
+                    AccueilAdmin accueilAdminPage = new AccueilAdmin(admin);
+                    NavigationService.Navigate(accueilAdminPage);
+                }
+                else
+                {
+                    MessageBox.Show("Admin introuvable !");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nom d'utilisateur ou mot de passe incorrect !");
+            }
+        }
+
+        private bool VerifyCredentialsAdmin(string username, string password)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM dbo.Administrator WHERE Username = @Username AND Password = @Password";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", username);
+                command.Parameters.AddWithValue("@Password", password);
+
+                connection.Open();
+                int count = (int)command.ExecuteScalar();
+                return count > 0;
+            }
+        }
+
+        private Administrator GetAdminFromDatabase(string username)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM dbo.Administrator WHERE Username = @Username";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", username);
+
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Administrator admin = new Administrator
+                    {
+                        IdUser = (int)reader["IdAdmin"],
+                        Username = (string)reader["Username"],
+                        Password = (string)reader["Password"],
+                    };
+
+                    return admin;
                 }
 
                 return null;

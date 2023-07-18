@@ -135,14 +135,12 @@ namespace GameLendXchange.WPF
             Window.GetWindow(this).Close();
         }
 
-       
-
-        private void LocationsButton_Click(object sender, RoutedEventArgs e)
+        private void BookingButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
-        private void ReservationsButton_Click(object sender, RoutedEventArgs e)
+        private void LocationsButton_Click(object sender, RoutedEventArgs e)
         {
             
         }

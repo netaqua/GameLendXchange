@@ -29,7 +29,7 @@
             </Grid>
 
             <!-- Autres éléments -->
-            <Image HorizontalAlignment="Left" Source="Pictures/Logo_nom_slogan.png" Height="59" Margin="10,6,0,0" VerticalAlignment="Top" Width="176"/>
+            <Image HorizontalAlignment="Left" Source="Pictures/Logo_nom_slogan.png" Height="59" Margin="10,6,0,0" VerticalAlignment="Top" Width="138"/>
             <!--<DataGrid Name="dgGame" AutoGenerateColumns="True" Margin="114,95,37,0" ColumnWidth="*" VerticalAlignment="Top" Height="291"/>-->
 
             <DataGrid Name="dgGame" AutoGenerateColumns="False" Margin="136,94,37,89" ColumnWidth="*">
@@ -43,24 +43,24 @@
 
             <Rectangle HorizontalAlignment="Left" Height="301" Margin="44,94,0,0" Stroke="Black" VerticalAlignment="Top" Width="92">
                 <Rectangle.Fill>
-                    <SolidColorBrush Color="#698C6E" />
+                    <SolidColorBrush Color="#8CEE93" />
                 </Rectangle.Fill>
             </Rectangle>
 
             <StackPanel Margin="44,95,764,89">
-                <Button Name="Playstation"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="92" Click="Button_Click">
+                <Button Name="Playstation"  Background="#8CEE93" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="92" Click="Button_Click">
                     <Image Source="Pictures\playstation.png" Height="100" Width="89"/>
                 </Button>
-                <Button Name="XBOX"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="92" Click="Button_Click">
+                <Button Name="XBOX"  Background="#8CEE93" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="92" Click="Button_Click">
                     <Image Source="Pictures\xbox.png" Height="95" Width="89"/>
                 </Button>
-                <Button Name="NINTENDO"  Background="#698C6E" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="92" Click="Button_Click">
+                <Button Name="NINTENDO"  Background="#8CEE93" BorderBrush="Black" HorizontalAlignment="Left" Height="100" Width="92" Click="Button_Click">
                     <Image Source="Pictures\nintendo.png" Height="99" RenderTransformOrigin="0.508,0.416" Width="89" />
                 </Button>
             </StackPanel>
         </Grid>
         <Grid x:Name="ContentGrid" Visibility="Collapsed">
-            <Frame x:Name="MainFrame" Margin="2" Background="#86c598" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="MainFrame" Margin="2" Background="#8CEE93" NavigationUIVisibility="Hidden"/>
         </Grid>
     </Grid>
 </Window>
