@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameLendXchange.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -13,5 +14,11 @@ namespace GameLendXchange.Classes
         public DateTime BookingDate { get; set; }
         public Player Player { get; set; }
         public VideoGame VideoGame { get; set; }
+
+        public static List<Booking> GetBookings()
+        {
+            BookingDB dB = new BookingDB();
+            return dB.ReadAll();
+        }
     }
 }

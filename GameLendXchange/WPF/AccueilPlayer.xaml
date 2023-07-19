@@ -27,24 +27,51 @@
 
             <!-- Buttons -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-                <Button Content="Mes réservations" Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" Width="110" Click="ReservationsButton_Click"/>
-                <Button Content="Mes locations" Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" Width="110" Click="LocationsButton_Click"/>
+                <!-- LANCER VERS LA PAGE INFOGAME - LE PLAYER DEVRA CHOISIR L'ID DU JEU - LA COPIE SERA VERIFIEE EN DB-->
+                <Button Content="Louer un jeu" Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" Width="110" Click="BookingButton_Click"/>
+                <!-- LANCER VERS UNE PAGE POUR ENREGISTRER UNE COPIE A LOUER (NOM JEU + CONSOLE) - COUT CREDIT DEFINI PAR L'ADMIN-->
+                <Button Content="Déposer un jeu" Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" Width="110" Click="LocationsButton_Click"/>
                 <Button Content="Déconnexion" Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62"  Width="90" Click="LogoutButton_Click"/>
             </StackPanel>
         </Grid>
 
         <!-- Game List -->
-        <DataGrid Name="dgGame" Grid.Row="1" AutoGenerateColumns="True" Margin="10">
-            <!--ColumnWidth for use datagrid on the full size-->
+        <DataGrid Name="dgGame" Grid.Row="1" AutoGenerateColumns="False" Margin="10,47,445,4">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding IdGame}" />
+                <DataGridTextColumn Header="Nom du jeu" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Coût en crédits" Binding="{Binding CreditCost}" />
+                <DataGridTextColumn Header="Console" Binding="{Binding Console}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid Name="dgBooking" AutoGenerateColumns="False" Margin="541,63,15,144" Height="160" Grid.RowSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID Réservation" Binding="{Binding IdBooking}" />
+                <DataGridTextColumn Header="Date de réservation" Binding="{Binding BookingDate}" />
+                <DataGridTextColumn Header="ID Jeu" Binding="{Binding IdVideoGame}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid Name="dgLoan" Grid.Row="1" AutoGenerateColumns="False" Margin="543,241,13,19" Grid.RowSpan="2" Height="160">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID Location" Binding="{Binding IdLocation}" />
+                <DataGridTextColumn Header="Date de début" Binding="{Binding StartDate}" />
+                <DataGridTextColumn Header="Date de fin" Binding="{Binding EndDate}" />
+                <DataGridTextColumn Header="Activité" Binding="{Binding Activity}" />
+                <DataGridTextColumn Header="ID Emprunteur" Binding="{Binding IdBorrower}" />
+                <DataGridTextColumn Header="ID Copie" Binding="{Binding IdCopy}" />
+            </DataGrid.Columns>
         </DataGrid>
 
         <!-- Player Information -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
-            <StackPanel>
-                <TextBlock Text="{Binding PlayerName}" FontSize="20" FontWeight="Bold" Margin="0 0 0 5"/>
-                <TextBlock Text="{Binding PlayerEmail}" FontSize="14" Margin="0 0 0 5"/>
-                <Button Content="Éditer mes informations" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" Width="150" Click="EditPlayerButton_Click"/>
-            </StackPanel>
+            <!--StackPanel>
+            A VOIR SI ON GARDE, PLUS PROPRE SANS
+                <TextBlock x:Name="playerName" Text="{Binding PlayerName}" FontSize="20" FontWeight="Bold" Margin="0 0 0 5"/>
+                <TextBlock x:Name="playerPassword" Text="{Binding PlayerUsername}" FontSize="14" Margin="0 0 0 5"/>
+                <Button Content="Mettre à jour mes informations" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" Width="191" Click="EditPlayerButton_Click"/>
+            </StackPanel-->
             <StackPanel>
                 <TextBlock Text="Credit : " FontSize="20" FontWeight="Bold" Margin="0 0 0 5" TextAlignment="Right"/>
                 <TextBlock Text="Date d'enregistrement : " FontSize="20" FontWeight="Bold" Width="226" TextAlignment="Right"/>
@@ -54,5 +81,8 @@
                 <TextBlock Text="{Binding PlayerRegisterDate}" FontSize="20" FontWeight="Bold" Margin="0 0 0 5"/>
             </StackPanel>
         </StackPanel>
+        <Label Content="Jeux" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="10,8,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Réservations" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="537,11,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Jeux mis en location" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="539,235,0,0" Grid.Row="1" VerticalAlignment="Top"/>
     </Grid>
 </Page>

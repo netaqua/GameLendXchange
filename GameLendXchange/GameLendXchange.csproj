@@ -8,7 +8,37 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pictures\logo.png" />
+    <None Remove="Pictures\Logo_nom_slogan.png" />
+    <None Remove="Pictures\nintendo.png" />
+    <None Remove="Pictures\nom_sloan.png" />
+    <None Remove="Pictures\playstation.png" />
+    <None Remove="Pictures\xbox.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pictures\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pictures\Logo_nom_slogan.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pictures\nintendo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pictures\nom_sloan.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pictures\playstation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pictures\xbox.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -94,7 +94,7 @@ namespace GameLendXchange.DAO
                     while (reader.Read())
                     {
                         VideoGame videoGame = new VideoGame();
-                        videoGame.IdGame = reader.GetInt32("idGame");
+                        videoGame.IdGame = reader.GetInt32("idVideoGame");
                         videoGame.Name = reader.GetString("name");
                         videoGame.CreditCost = reader.GetInt32("creditCost");
                         videoGame.Console = reader.GetString("Console");
@@ -119,7 +119,7 @@ namespace GameLendXchange.DAO
                     while (reader.Read())
                     {
                         VideoGame videoGame = new VideoGame();
-                        videoGame.IdGame = reader.GetInt32("idGame");
+                        videoGame.IdGame = reader.GetInt32("idVideoGame");
                         videoGame.Name = reader.GetString("name");
                         videoGame.CreditCost = reader.GetInt32("creditCost");
                         videoGame.Console = reader.GetString("Console");
@@ -142,7 +142,7 @@ namespace GameLendXchange.DAO
                     while (reader.Read())
                     {
                         VideoGame videoGame = new VideoGame();
-                        videoGame.IdGame = reader.GetInt32("idGame");
+                        videoGame.IdGame = reader.GetInt32("idVideoGame");
                         videoGame.Name = reader.GetString("name");
                         videoGame.CreditCost = reader.GetInt32("creditCost");
                         videoGame.Console = reader.GetString("Console");
@@ -165,7 +165,7 @@ namespace GameLendXchange.DAO
                     while (reader.Read())
                     {
                         VideoGame videoGame = new VideoGame();
-                        videoGame.IdGame = reader.GetInt32("idGame");
+                        videoGame.IdGame = reader.GetInt32("idVideoGame");
                         videoGame.Name = reader.GetString("name");
                         videoGame.CreditCost = reader.GetInt32("creditCost");
                         videoGame.Console = reader.GetString("Console");
