@@ -102,5 +102,50 @@ namespace GameLendXchange.DAO
             }
             return copys;
         }
+
+        // Méthode pour récupérer toutes les copies d'un jeu à partir de son identifiant
+        public List<Copy> ReadAllCopiesByVideoGame(int idGame)
+        {
+            List<Copy> copies = new List<Copy>();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "SELECT IdCopy, IdOwner FROM Copy WHERE IdVideoGame = @IdVideoGame";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdVideoGame", idGame);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Créer un nouvel objet Copy avec les données de la base de données
+                                Copy copy = new Copy
+                                {
+                                    IdCopy = Convert.ToInt32(reader["IdCopy"]),
+                                    Owner = Player.GetPlayerById(Convert.ToInt32(reader["IdOwner"])),
+                                    VideoGame = VideoGame.GetGameById(idGame)
+                                };
+
+                                copies.Add(copy);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Gérer les erreurs de lecture de la base de données
+                Console.WriteLine("Erreur lors de la lecture des copies : " + ex.Message);
+            }
+
+            return copies;
+        }
+
     }
 }

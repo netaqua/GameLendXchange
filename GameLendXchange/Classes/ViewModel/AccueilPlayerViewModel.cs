@@ -11,59 +11,72 @@ using System.Windows.Data;
 
 namespace GameLendXchange.Classes.ViewModel
 {
-    internal class AccueilPlayerViewModel : INotifyPropertyChanged
+    public class AccueilPlayerViewModel : INotifyPropertyChanged
     {
-        private Player currentPlayer;
-        private ObservableCollection<VideoGame> gameList;
-
-        public Player CurrentPlayer
-        {
-            get { return currentPlayer; }
-            set
-            {
-                currentPlayer = value;
-                OnPropertyChanged(nameof(CurrentPlayer));
-            }
-        }
-
-        public ObservableCollection<VideoGame> GameList
-        {
-            get { return gameList; }
-            set
-            {
-                gameList = value;
-                OnPropertyChanged(nameof(GameList));
-            }
-        }
-
-        public void HomePageViewModel()
-        {
-            // Initialisez les données nécessaires pour la page d'accueil
-            LoadCurrentPlayer();
-            LoadGameList();
-            
-        }
-
-        private void LoadCurrentPlayer()
-        {
-            // Effectuez les opérations nécessaires pour récupérer les informations du joueur actuel
-            // par exemple, à partir d'une source de données ou d'un service
-            CurrentPlayer = new Player(); // Remplacez par la logique appropriée pour charger le joueur actuel
-        }
-
-        private void LoadGameList()
-        {
-            // Effectuez les opérations nécessaires pour récupérer la liste des jeux
-            // par exemple, à partir d'une source de données ou d'un service
-            GameList = new ObservableCollection<VideoGame>(); // Remplacez par la logique appropriée pour charger la liste des jeux
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private int playerCredit;
+        public int PlayerCredit
+        {
+            get { return playerCredit; }
+            set
+            {
+                playerCredit = value;
+                OnPropertyChanged(nameof(PlayerCredit));
+            }
+        }
+        
+        private String playerPseudo;
+        public String PlayerPseudo
+        {
+            get { return playerPseudo; }
+            set
+            {
+                playerPseudo = value;
+                OnPropertyChanged(nameof(PlayerPseudo));
+            }
+        }
+
+        private DateTime playerRegistrationDate;
+        public DateTime PlayerRegistrationDate
+        {
+            get { return playerRegistrationDate; }
+            set
+            {
+                playerRegistrationDate = value;
+                OnPropertyChanged(nameof(PlayerRegistrationDate));
+            }
+        }
+
+        private DateTime playerDateOfBirth;
+        public DateTime PlayerDateOfBirth
+        {
+            get { return playerDateOfBirth; }
+            set
+            {
+                playerDateOfBirth = value;
+                OnPropertyChanged(nameof(playerDateOfBirth));
+            }
+        }
+
+        
+
+        public AccueilPlayerViewModel(Player currentPlayer)
+        {
+            PlayerPseudo = currentPlayer.Pseudo;
+            PlayerCredit = currentPlayer.Credit;
+            PlayerRegistrationDate = currentPlayer.RegistrationDate;
+            PlayerDateOfBirth = currentPlayer.DateOfBirth;
+
+            
+        }
+
+  
     }
 }
+

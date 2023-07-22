@@ -36,7 +36,7 @@
         </Grid>
 
         <!-- Game List -->
-        <DataGrid Name="dgGame" Grid.Row="1" AutoGenerateColumns="False" Margin="10,47,445,4">
+        <DataGrid Name="dgGame" Grid.Row="1" AutoGenerateColumns="False" Margin="10,47,445,4" SelectionChanged="dgGame_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding IdGame}" />
                 <DataGridTextColumn Header="Nom du jeu" Binding="{Binding Name}" />
@@ -45,15 +45,15 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Name="dgBooking" AutoGenerateColumns="False" Margin="541,63,15,144" Height="160" Grid.RowSpan="2">
+        <DataGrid Name="dgBooking" AutoGenerateColumns="False" Margin="546,17,10,117" Height="160" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID Réservation" Binding="{Binding IdBooking}" />
                 <DataGridTextColumn Header="Date de réservation" Binding="{Binding BookingDate}" />
-                <DataGridTextColumn Header="ID Jeu" Binding="{Binding IdVideoGame}" />
+                <DataGridTextColumn Header="ID Jeu" Binding="{Binding VideoGame}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Name="dgLoan" Grid.Row="1" AutoGenerateColumns="False" Margin="543,241,13,19" Grid.RowSpan="2" Height="160">
+        <DataGrid Name="dgLoan" Grid.Row="1" AutoGenerateColumns="False" Margin="546,184,10,33" Grid.RowSpan="2" Height="160">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID Location" Binding="{Binding IdLocation}" />
                 <DataGridTextColumn Header="Date de début" Binding="{Binding StartDate}" />
@@ -78,11 +78,11 @@
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="{Binding PlayerCredit}" FontSize="20" FontWeight="Bold" Margin="0 0 0 5" Width="137"/>
-                <TextBlock Text="{Binding PlayerRegisterDate}" FontSize="20" FontWeight="Bold" Margin="0 0 0 5"/>
+                <TextBlock Text="{Binding PlayerRegistrationDate}" FontSize="20" FontWeight="Bold" Margin="0 0 0 5"/>
             </StackPanel>
         </StackPanel>
         <Label Content="Jeux" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="10,8,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="Réservations" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="537,11,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="Jeux mis en location" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="539,235,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Réservations" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="546,142,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Jeux mis en location" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="546,10,0,0" Grid.Row="2" VerticalAlignment="Top"/>
     </Grid>
 </Page>

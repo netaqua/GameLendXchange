@@ -14,10 +14,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Left Section: Game Image -->
-        <Border Background="#EDEEF2" Padding="10" CornerRadius="5">
-            <Image Source="{Binding CoverImage}" Height="300" Width="200" Stretch="UniformToFill"/>
-        </Border>
+      
 
         <!-- Right Section: Game Details -->
         <StackPanel Grid.Column="1" Margin="20">

@@ -237,6 +237,42 @@ namespace GameLendXchange.DAO
             return success;
         }
 
+        public Player GetPlayerById(int idPlayer)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM dbo.Player WHERE idPlayer = @idPlayer";
+
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@idPlayer", idPlayer);
+                    connection.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Player player = new Player
+                            {
+                                IdUser = reader.GetInt32("idPlayer"),
+                                Credit = reader.GetInt32("credit"),
+                                Username = reader.GetString("username"),
+                                Pseudo = reader.GetString("pseudo"),
+                                Password = reader.GetString("password"),
+                                RegistrationDate = reader.GetDateTime("registrationDate"),
+                                DateOfBirth = reader.GetDateTime("dateOfBirth"),
+                        };
+                            return player;
+                        }
+                    }
+                }
+            }
+
+            return null; // Return null if player not found or an error occurred.
+        }
+
+
+
 
     }
 }

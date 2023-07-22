@@ -19,13 +19,19 @@ namespace GameLendXchange.WPF
 {
     public partial class AccueilPlayer : Page
     {
+        public Player player;
         public AccueilPlayer(Player p)
         {
+
             InitializeComponent();
-            DataContext = new AccueilPlayerViewModel();
-             ConfigureDataGridColumnsGames();
-             ConfigureDataGridColumnsBooking();
-             ConfigureDataGridColumnsLoan();
+            player = p;
+            AccueilPlayerViewModel viewModel = new AccueilPlayerViewModel(p);
+
+            DataContext = viewModel;
+
+            ConfigureDataGridColumnsGames();
+            ConfigureDataGridColumnsBooking();
+            ConfigureDataGridColumnsLoan();
         }
 
         //-------------------------------------------------------------------------------//
@@ -80,7 +86,7 @@ namespace GameLendXchange.WPF
             idGameColumn.Binding = new Binding("IdVideoGame");
             dgBooking.Columns.Add(idGameColumn);
 
-            List<Booking> bookings= new List<Booking>();
+            List<Booking> bookings= Booking.GetBookingsPlayer(player.IdUser);
             
             dgBooking.ItemsSource = bookings;
         }
@@ -122,6 +128,18 @@ namespace GameLendXchange.WPF
             List<Loan> loans = new List<Loan>();
 
             dgLoan.ItemsSource = loans;
+        }
+
+        //-------------------------------------------------------------------------------//
+        //******************** RECUPERATION DE L'ID DU TABLEAU JEU **************************************//
+        //-------------------------------------------------------------------------------//
+
+        private void dgGame_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dgGame.SelectedItem is VideoGame selectedGame)
+            {
+                NavigationService?.Navigate(new InfoGame(selectedGame.IdGame));
+            }
         }
 
         //-------------------------------------------------------------------------------//

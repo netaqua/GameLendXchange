@@ -20,5 +20,18 @@ namespace GameLendXchange.Classes
             BookingDB dB = new BookingDB();
             return dB.ReadAll();
         }
+
+        public static List<Booking> GetBookingsPlayer(int idPlayer)
+        {
+            BookingDB dB = new BookingDB();
+            return dB.ReadAllBookingPlayer(idPlayer);
+        }
+
+        public static List<Booking> GetBookingsByVideoGame(int idGame)
+        {
+            BookingDB db = new BookingDB();
+            return db.ReadAllBookingsByVideoGame(idGame);
+        }
+
     }
 }

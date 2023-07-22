@@ -1,4 +1,5 @@
 ﻿using GameLendXchange.Classes;
+using GameLendXchange.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,17 @@ namespace GameLendXchange.WPF
     /// </summary>
     public partial class InfoGame : Page
     {
-        public InfoGame(VideoGame selectedGame)
+
+        private int selectedGameID;
+        public InfoGame(int gameID)
         {
             InitializeComponent();
+            InfoGameViewModel viewModel = new InfoGameViewModel(gameID);
+            DataContext = viewModel;
         }
+
+
+
 
     }
 }

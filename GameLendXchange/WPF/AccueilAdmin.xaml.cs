@@ -61,5 +61,15 @@ namespace GameLendXchange.WPF
                     break;
             }
         }
+
+        private void GridAdmin_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

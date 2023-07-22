@@ -47,5 +47,11 @@ namespace GameLendXchange.Classes
             return db.Create(this);
         }
 
+        public static Player GetPlayerById(int idPlayer)
+        {
+            PlayerDB dB = new PlayerDB();
+            return dB.GetPlayerById(idPlayer);
+        }
+
     }
 }

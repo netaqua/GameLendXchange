@@ -46,7 +46,31 @@ namespace GameLendXchange.DAO
                     if (reader.Read())
                     {
                         v = new VideoGame();
-                        v.IdGame = reader.GetInt32("idGame");
+                        v.IdGame = reader.GetInt32("idVideoGame");
+                        v.Name = reader.GetString("name");
+                        v.CreditCost = reader.GetInt32("creditCost");
+                        v.Console = reader.GetString("Console");
+                    }
+                }
+            }
+            return v;
+        }
+
+        public VideoGame ReadId(int idVideoGame)
+        {
+            VideoGame v = null;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand($"SELECT * FROM dbo.VideoGame WHERE idVideoGame=@idVideoGame", connection);
+
+                cmd.Parameters.AddWithValue("idVideoGame", idVideoGame);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        v = new VideoGame();
+                        v.IdGame = reader.GetInt32("idVideoGame");
                         v.Name = reader.GetString("name");
                         v.CreditCost = reader.GetInt32("creditCost");
                         v.Console = reader.GetString("Console");
@@ -61,7 +85,7 @@ namespace GameLendXchange.DAO
             bool success = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"UPDATE dbo.VideoGame SET Name = '{v.Name}', CreditCost = '{v.CreditCost}', Console = '{v.Console}' WHERE idGame = {v.IdGame}", connection);
+                SqlCommand cmd = new SqlCommand($"UPDATE dbo.VideoGame SET Name = '{v.Name}', CreditCost = '{v.CreditCost}', Console = '{v.Console}' WHERE idVideoGame = {v.IdGame}", connection);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
                 success = res > 0;
@@ -74,7 +98,7 @@ namespace GameLendXchange.DAO
             bool success = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"DELETE FROM dbo.VideoGame WHERE idGame = {v.IdGame}", connection);
+                SqlCommand cmd = new SqlCommand($"DELETE FROM dbo.VideoGame WHERE idVideoGame = {v.IdGame}", connection);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
                 success = res > 0;
@@ -175,5 +199,50 @@ namespace GameLendXchange.DAO
             }
             return videoGames;
         }
+
+
+
+        public VideoGame ReadById(int idGame)
+        {
+            VideoGame videoGame = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "SELECT IdVideoGame, Name, CreditCost, Console FROM VideoGame WHERE IdVideoGame = @IdVideoGame";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdVideoGame", idGame);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Créer un nouvel objet VideoGame avec les données de la base de données
+                                videoGame = new VideoGame
+                                {
+                                    IdGame = Convert.ToInt32(reader["IdVideoGame"]),
+                                    Name = Convert.ToString(reader["Name"]),
+                                    CreditCost = Convert.ToInt32(reader["CreditCost"]),
+                                    Console = Convert.ToString(reader["Console"])
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Gérer les erreurs de lecture de la base de données
+                Console.WriteLine("Erreur lors de la lecture du jeu : " + ex.Message);
+            }
+
+            return videoGame;
+        }
+
     }
 }

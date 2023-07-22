@@ -84,28 +84,135 @@ namespace GameLendXchange.DAO
 
         public List<Booking> ReadAll()
         {
-            List<Booking> booking = new List<Booking>();
+            List<Booking> bookings = new List<Booking>();
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.Booking", connection);
-                connection.Open();
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                string query = "SELECT * FROM dbo.Booking";
+
+                using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
-                    while (reader.Read())
+                    connection.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Booking b = new Booking();
-                        b = new Booking();
-                        b.IdBooking = reader.GetInt32("idBooking");
-                        b.BookingDate = reader.GetDateTime("bookingDate");
-                        b.Player.IdUser = reader.GetInt32("idPlayer");
-                        b.VideoGame.IdGame = reader.GetInt32("idVideoGame");
-                        booking.Add(b);
+                        while (reader.Read())
+                        {
+                            int idGame = reader.GetInt32(reader.GetOrdinal("idVideoGame"));
+                            VideoGame game = VideoGame.ReadId(idGame);
+                            int idPlayer = reader.GetInt32(reader.GetOrdinal("idPlayer"));
+                            Player player = Player.GetPlayerById(idPlayer);
+                            if (game != null && player != null)
+                            {
+                                Booking booking = new Booking
+                                {
+                                    IdBooking = reader.GetInt32(reader.GetOrdinal("idBooking")),
+                                    BookingDate = reader.GetDateTime(reader.GetOrdinal("bookingDate")),
+                                    Player = player,
+                                    VideoGame = game, // Assign the game object to the Booking.VideoGame property.
+                                };
+                                bookings.Add(booking);
+                            }
+                        }
                     }
                 }
             }
-            return booking;
+
+            return bookings;
         }
 
+        public List<Booking> ReadAllBookingPlayer(int idPlayer)
+        {
+            List<Booking> bookings = new List<Booking>();
+            Player player = Player.GetPlayerById(idPlayer);
+            
+
+            if (player == null)
+            {
+                // Player not found, handle the situation accordingly.
+                return bookings;
+            }
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM dbo.Booking WHERE idPlayer = @idPlayer";
+
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@idPlayer", idPlayer);
+                    connection.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int idGame = reader.GetInt32(reader.GetOrdinal("idVideoGame"));
+                            VideoGame game = VideoGame.ReadId(idGame);
+
+                            if (game != null)
+                            {
+                                Booking booking = new Booking
+                                {
+                                    IdBooking = reader.GetInt32(reader.GetOrdinal("idBooking")),
+                                    BookingDate = reader.GetDateTime(reader.GetOrdinal("bookingDate")),
+                                    Player = player,
+                                    VideoGame = game, // Assign the game object to the Booking.VideoGame property.
+                                };
+                                bookings.Add(booking);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return bookings;
+        }
+
+        // Méthode pour récupérer toutes les réservations d'un jeu à partir de son identifiant
+        public List<Booking> ReadAllBookingsByVideoGame(int idGame)
+        {
+            List<Booking> bookings = new List<Booking>();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "SELECT IdBooking, BookingDate, IdPlayer FROM Booking WHERE IdVideoGame = @IdVideoGame";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdVideoGame", idGame);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Créer un nouvel objet Booking avec les données de la base de données
+                                Booking booking = new Booking
+                                {
+                                    IdBooking = Convert.ToInt32(reader["IdBooking"]),
+                                    BookingDate = Convert.ToDateTime(reader["BookingDate"]),
+                                    Player = Player.GetPlayerById(Convert.ToInt32(reader["IdPlayer"])),
+                                    VideoGame = VideoGame.GetGameById(idGame)
+                                };
+
+                                bookings.Add(booking);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Gérer les erreurs de lecture de la base de données
+                Console.WriteLine("Erreur lors de la lecture des réservations : " + ex.Message);
+            }
+
+            return bookings;
+        }
 
     }
 }
+

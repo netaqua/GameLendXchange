@@ -23,13 +23,13 @@
             </Grid.ColumnDefinitions>
 
             <!-- Logo -->
-            <Image Source="../Pictures/logo.png" Margin="-26,8,769,4" Grid.ColumnSpan="2"/>
+            <Image Source="../Pictures/logo.png" Margin="28,6,715,6" Grid.ColumnSpan="2"/>
 
             <!-- Buttons -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
                 <Button Content="Déconnexion" Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62"  Width="90" Click="LogoutButton_Click"/>
             </StackPanel>
-            <Label Grid.Column="1" Content="Accueil Administrateur" FontSize="23" FontWeight="Bold" HorizontalAlignment="Left" Margin="337,18,0,0" VerticalAlignment="Top" Width="287"/>
+            <Label Grid.Column="1" Content="Accueil Administrateur" FontSize="23" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="288"/>
         </Grid>
 
         <StackPanel Margin="7,114,654,76" Grid.RowSpan="2" >
@@ -38,8 +38,9 @@
             <Button x:Name="Reservation" Content="Reservations"  FontFamily="Verdana" FontSize="17" Background="#8CEE93"  BorderBrush="Black" Height="65" Click="Button_Click"/>
             <Button x:Name="Location" Content="Locations"  FontFamily="Verdana" FontSize="17" Background="#8CEE93"  BorderBrush="Black" Height="65" Click="Button_Click"/>
         </StackPanel>
+        <Button x:Name="Edit" Content="éditer"  FontFamily="Verdana" FontSize="14" Background="#8CEE93"  BorderBrush="Black" Click="ButtonEdit_Click" Margin="681,88,40,181"/>
 
-        <DataGrid  Margin="383,115,40,73" x:Name="GridAdmin" AutoGenerateColumns="True" Grid.RowSpan="2">
+        <DataGrid  Margin="383,115,40,73" x:Name="GridAdmin" AutoGenerateColumns="True" Grid.RowSpan="2" SelectionChanged="GridAdmin_SelectionChanged">
             <DataGrid.Columns>
 
             </DataGrid.Columns>
