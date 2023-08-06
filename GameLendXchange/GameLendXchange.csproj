@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Classes\BirthdayBonusManager.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Pictures\logo.png" />
     <None Remove="Pictures\Logo_nom_slogan.png" />
     <None Remove="Pictures\nintendo.png" />

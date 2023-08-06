@@ -13,6 +13,8 @@ namespace GameLendXchange.Classes
         public string Pseudo { get; set; }
         public DateTime RegistrationDate { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public bool IsBirthdayBonusReceived { get; set; }
+
 
         public Player(int idPlayer, string pseudo, string username, string password, DateTime registrationDate, DateTime dateOfBirth)
         {
@@ -53,5 +55,16 @@ namespace GameLendXchange.Classes
             return dB.GetPlayerById(idPlayer);
         }
 
+        public static void GetBirthdayBonus(Player player)
+        {
+            if (!player.IsBirthdayBonusReceived)
+            {
+                PlayerDB.AddBirthdayBonus(player);
+            }
+            else
+            {
+                Console.WriteLine("Bonus déjà reçu ... ");
+            }
+        }
     }
 }

@@ -44,7 +44,6 @@ namespace GameLendXchange.WPF
             {
                 c.IdCopy = gameId;
 
-                // Utilisez votre méthode pour récupérer l'objet VideoGame à partir de l'ID
                 VideoGame videoGame = VideoGame.GetGameById(gameId);
 
                 if (videoGame != null)
@@ -53,7 +52,6 @@ namespace GameLendXchange.WPF
 
                     if (int.TryParse(idPlayerText.Text, out int playerId))
                     {
-                        // Utilisez votre méthode pour récupérer l'objet Player à partir de l'ID
                         Player ownerPlayer = Player.GetPlayerById(playerId);
 
                         if (ownerPlayer != null)

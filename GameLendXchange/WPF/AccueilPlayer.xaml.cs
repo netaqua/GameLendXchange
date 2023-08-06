@@ -26,6 +26,7 @@ namespace GameLendXchange.WPF
             InitializeComponent();
             player = p;
             AccueilPlayerViewModel viewModel = new AccueilPlayerViewModel(p);
+            Player.GetBirthdayBonus(p);
 
             DataContext = viewModel;
 

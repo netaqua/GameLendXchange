@@ -54,7 +54,7 @@ namespace GameLendXchange.DAO
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand($"INSERT into dbo.Player(username,password,dateOfBirth, registrationDate,pseudo, credit) values ('{p.Username}','{p.Password}','{p.RegistrationDate:yyyy-MM-dd}', '{p.DateOfBirth:yyyy-MM-dd}','{p.Pseudo}',0)", connection); 
+                    SqlCommand cmd = new SqlCommand($"INSERT into dbo.Player(username,password,dateOfBirth, registrationDate,pseudo) values ('{p.Username}','{p.Password}','{p.RegistrationDate:yyyy-MM-dd}', '{p.DateOfBirth:yyyy-MM-dd}','{p.Pseudo}')", connection); 
                     connection.Open(); // permet d'exécuter une commande d'insert / update / delete
                     int res = cmd.ExecuteNonQuery();
                     success = res > 0;
@@ -214,7 +214,7 @@ namespace GameLendXchange.DAO
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand($"INSERT into dbo.Player(username,password,dateOfBirth, registrationDate,pseudo, credit) values ('{p.Username}','{p.Password}','{p.DateOfBirth}','{p.RegistrationDate}','{p.Pseudo}','{p.Credit}')", connection);
+                    SqlCommand cmd = new SqlCommand($"INSERT into dbo.Player(username,password,dateOfBirth, registrationDate,pseudo) values ('{p.Username}','{p.Password}','{p.DateOfBirth}','{p.RegistrationDate}','{p.Pseudo}')", connection);
                     connection.Open(); // permet d'exécuter une commande d'insert / update / delete
                     int res = cmd.ExecuteNonQuery();
                     success = res > 0;
@@ -271,8 +271,45 @@ namespace GameLendXchange.DAO
             return null; // Return null if player not found or an error occurred.
         }
 
+        public static void AddBirthdayBonus(Player player)
+        {
+            if (player.DateOfBirth.Month == DateTime.Now.Month && player.DateOfBirth.Day == DateTime.Now.Day)
+            {
+                // Vérifier si le bonus d'anniversaire n'a pas encore été reçu (non fonctionnel pour le moment)
+                if (!player.IsBirthdayBonusReceived)
+                {
+                    player.Credit += 2;
+                    player.IsBirthdayBonusReceived = true; // Mettre à jour le champ pour indiquer que le bonus a été reçu
 
+                    PlayerDB playerDB = new PlayerDB();
 
+                    using (SqlConnection connection = new SqlConnection(playerDB.connectionString))
+                    {
+                        connection.Open();
+
+                        string sql = $"UPDATE dbo.Player SET credit = @credit WHERE idPlayer = @idPlayer";
+                        SqlCommand cmd = new SqlCommand(sql, connection);
+                        cmd.Parameters.AddWithValue("@credit", player.Credit);
+                        cmd.Parameters.AddWithValue("@isReceived", player.IsBirthdayBonusReceived);
+                        cmd.Parameters.AddWithValue("@idPlayer", player.IdUser);
+
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            Console.WriteLine("Joyeux anniversaire !");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Erreur");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Vous avez déjà reçu votre bonus d'anniversaire ...");
+                }
+            }
+        }
 
     }
 }
