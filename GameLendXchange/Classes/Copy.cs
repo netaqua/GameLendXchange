@@ -21,6 +21,12 @@ namespace GameLendXchange.Classes
                 return db.ReadAllCopiesByVideoGame(idGame);
             }
 
+        public bool Insert()
+        {
+            CopyDB db = new CopyDB();
+            return db.Create(this);
+        }
+
     }
 
     

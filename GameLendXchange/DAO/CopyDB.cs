@@ -23,13 +23,14 @@ namespace GameLendXchange.DAO
             bool success = false;
             using (SqlConnection connection = new SqlConnection(connectionString)) // Pas oublier l'auto_incrementation dans la base de donnée pour l'ID
             {
-                SqlCommand cmd = new SqlCommand($"INSERT INTO dbo.Copy(idCopy, idVideoGame, idOwner) VALUES({c.IdCopy}, {c.VideoGame.IdGame}, {c.Owner.IdUser})", connection);
+                SqlCommand cmd = new SqlCommand($"INSERT INTO dbo.Copy(idVideoGame, idOwner) VALUES({c.VideoGame.IdGame}, {c.Owner.IdUser})", connection);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
                 success = res > 0;
             }
             return success;
         }
+
         public Copy Read(int idGame, int idOwner)
         {
             Copy c = null;

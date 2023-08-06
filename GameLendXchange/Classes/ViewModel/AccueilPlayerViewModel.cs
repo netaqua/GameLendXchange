@@ -20,6 +20,18 @@ namespace GameLendXchange.Classes.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private int playerID;
+
+        public int PlayerID
+        {
+            get { return playerID; }
+            set
+            {
+                playerID = value;
+                OnPropertyChanged(nameof(PlayerID));
+            }
+        }
+
         private int playerCredit;
         public int PlayerCredit
         {

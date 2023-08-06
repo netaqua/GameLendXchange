@@ -160,7 +160,15 @@ namespace GameLendXchange.WPF
 
         private void LocationsButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            SetOnLocations setLocationPage = new SetOnLocations(player);
+
+            setLocationPage.Tag = "Informations supplémentaires si nécessaires";
+
+            MainWindow mainWindow = Window.GetWindow(this) as MainWindow;
+            if (mainWindow != null)
+            {
+                mainWindow.MainFrame.Navigate(setLocationPage);
+            }
         }
 
         //private void EditPlayerButton_Click(object sender, RoutedEventArgs e)
