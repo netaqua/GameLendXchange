@@ -33,5 +33,11 @@ namespace GameLendXchange.Classes
             return db.ReadAllBookingsByVideoGame(idGame);
         }
 
+        public bool Insert()
+        {
+            BookingDB db = new BookingDB();
+            return db.Create(this);
+        }
+
     }
 }

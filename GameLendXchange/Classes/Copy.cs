@@ -15,6 +15,8 @@ namespace GameLendXchange.Classes
         public List<Loan> Loans { get; set; }
         public VideoGame VideoGame { get; set; }
 
+        public bool Available { get; set; }
+
         public static List<Copy> GetCopiesByVideoGame(int idGame)
             {
                 CopyDB db = new CopyDB();
@@ -26,6 +28,25 @@ namespace GameLendXchange.Classes
             CopyDB db = new CopyDB();
             return db.Create(this);
         }
+
+        public bool Update()
+        {
+            CopyDB db = new CopyDB();
+            return db.Update(this);
+        }
+
+        public void RealeaseCopy()
+        {
+
+        }
+
+        public void Borrow() { }
+
+        public bool IsAvailable() 
+        { 
+            return true;
+        }
+
 
     }
 

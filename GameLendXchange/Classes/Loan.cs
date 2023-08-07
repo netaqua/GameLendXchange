@@ -23,5 +23,12 @@ namespace GameLendXchange.Classes
             LoanDB dB = new LoanDB();
             return dB.ReadAll();
         }
+
+        public bool insert()
+        {
+            LoanDB db = new LoanDB();
+            return db.Create(this);
+        }
+
     }
 }

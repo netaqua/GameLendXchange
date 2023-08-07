@@ -21,13 +21,29 @@ namespace GameLendXchange.DAO
 
         public bool Create(Loan l)
         {
-            bool success = false;
+            var success = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"INSERT INTO dbo.Loan(StartDate, EndDate, OnGoing, idCopy, idLender, idBorrower) VALUES({l.StartDate}, '{l.EndDate}', '{l.OnGoing}', {l.Copy.IdCopy},{l.Lender.IdUser},{l.Borrower.IdUser})", connection);
-                connection.Open();
-                int res = cmd.ExecuteNonQuery();
-                success = res > 0;
+                try
+                {
+                    int OnGo = 0;
+                    if (l.OnGoing == true)
+                    {
+                        OnGo = 1;
+                    }
+                    else
+                    {
+                        OnGo = 0;
+                    }
+                    SqlCommand cmd = new SqlCommand($"INSERT INTO dbo.Loan(startDate, endDate, onGoing, idCopy, idLender, idBorrower) VALUES('{l.StartDate:yyyy-MM-dd}', '{l.EndDate:yyyy-MM-dd}', '{OnGo}', {l.Copy.IdCopy},{l.Lender.IdUser},{l.Borrower.IdUser})", connection);
+                    connection.Open();
+                    int res = cmd.ExecuteNonQuery();
+                    success = res > 0;
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Une erreur SQL s'est produite : " + ex.Message);
+                }
             }
             return success;
         }

@@ -28,30 +28,29 @@
                 <SolidColorBrush Color="White" />
             </Rectangle.Fill>
         </Rectangle>
-       
+
         <Button x:Name="backBtn" Grid.Column="4" Content="Go Back" FontFamily="Verdana" FontSize="11" Background="GhostWhite" BorderBrush="#FBDA62" HorizontalAlignment="Left" Height="34" Margin="4,-28,0,0" VerticalAlignment="Top" Width="114" Click="backBtn_Click" Grid.ColumnSpan="3"/>
         <Label Grid.Column="1" Content="Déposer un jeu" FontSize="23" FontWeight="Bold" HorizontalAlignment="Left"  Width="211" Margin="354,-29,0,320" Grid.ColumnSpan="3"/>
-        <Button x:Name="ValidationBtn" Grid.Column="1" FontFamily="Verdana" FontSize="11" Background="#FBDA62" BorderBrush="WhiteSmoke" Content="Valider l'enregistrement" FontWeight="Black" Margin="13,284,0,0" VerticalAlignment="Top" Height="40" Click="ValidationBtn_Click" HorizontalAlignment="Left" Width="294"/>
+        <Button x:Name="ValidationBtn" Grid.Column="1" FontFamily="Verdana" FontSize="11" Background="#FBDA62" BorderBrush="WhiteSmoke" Content="Déposer une copie" FontWeight="Black" Margin="13,284,0,0" VerticalAlignment="Top" Height="40" Click="DepositBtn_Click" HorizontalAlignment="Left" Width="294"/>
+        <Button x:Name="ValidationBtn_Copy" Grid.Column="3" FontFamily="Verdana" FontSize="11" Background="#FBDA62" BorderBrush="WhiteSmoke" Content="Louer une copie" FontWeight="Black" Margin="24,284,0,0" VerticalAlignment="Top" Height="40" Click="LoanBtn_Click" HorizontalAlignment="Left" Width="294" Grid.ColumnSpan="4"/>
 
 
 
         <!-- Right Section: Game Details -->
-        <StackPanel Grid.Column="1" Margin="19,52,21,0" Grid.ColumnSpan="6" Height="207" VerticalAlignment="Top">
+        <StackPanel Grid.Column="1" Margin="170,91,74,0" Grid.ColumnSpan="3" Height="118" VerticalAlignment="Top">
             <TextBlock Text="{Binding Name}" FontSize="30" FontWeight="Bold" FontFamily="Georgia" Margin="0 0 0 10"/>
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Id Game : " FontFamily="Georgia" FontSize="25" FontWeight="Bold"/>
                 <TextBox x:Name="idGameText" Text="{Binding ID}" FontSize="16" FontFamily="Georgia" Margin="10,0,0,0" Width="203" Height="24"/>
-        </StackPanel>
+            </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Margin="0,50,0,0" Height="34">
-            <TextBlock Text="Id Player : " FontFamily="Georgia" FontSize="25" FontWeight="Bold"/>
-            <TextBox x:Name="idPlayerText" Text="{Binding Copies}" FontSize="16" FontFamily="Georgia" Margin="10,0,0,0" Width="197" Height="24"/>
-        </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,50,0,0" Height="34"/>
 
         </StackPanel>
         <TextBlock x:Name="errorMessage" Grid.Column="1" FontFamily="Georgia" FontSize="16" Foreground="Red" Margin="10,0,10,0" Grid.Row="2" VerticalAlignment="Top" Height="32"/>
-
+        <TextBlock x:Name="validateMessage" Grid.Column="1" FontFamily="Georgia" FontSize="16" Foreground="Green" Margin="10,0,10,0" Grid.Row="2" VerticalAlignment="Top" Height="32"/>
+        
         <Frame x:Name="MainFrame" Margin="0" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>

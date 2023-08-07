@@ -109,9 +109,10 @@ namespace GameLendXchange.DAO
             bool success = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"UPDATE dbo.player SET credit = {p.Credit}, username = '{p.Username}', password = '{p.Password}', registrationDate = {p.RegistrationDate}, dateOfBirth = {p.DateOfBirth} WHERE idPlayer = {p.IdUser}", connection);
+                SqlCommand cmd = new SqlCommand($"UPDATE dbo.player SET credit = {p.Credit}, username = '{p.Username}', password = '{p.Password}', registrationDate = '{p.RegistrationDate}', dateOfBirth = '{p.DateOfBirth}' WHERE idPlayer = {p.IdUser}", connection);
                 connection.Open();
-                success = cmd.ExecuteNonQuery() > 0;
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
             }
             return success;
         }
@@ -280,7 +281,7 @@ namespace GameLendXchange.DAO
                 {
                     player.Credit += 2;
                     player.IsBirthdayBonusReceived = true; // Mettre à jour le champ pour indiquer que le bonus a été reçu
-
+                    
                     PlayerDB playerDB = new PlayerDB();
 
                     using (SqlConnection connection = new SqlConnection(playerDB.connectionString))

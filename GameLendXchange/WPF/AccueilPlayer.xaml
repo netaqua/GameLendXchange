@@ -28,9 +28,8 @@
             <!-- Buttons -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
                 <!-- LANCER VERS LA PAGE INFOGAME - LE PLAYER DEVRA CHOISIR L'ID DU JEU - LA COPIE SERA VERIFIEE EN DB-->
-                <Button Content="Louer un jeu" Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" Width="110" Click="BookingButton_Click"/>
                 <!-- LANCER VERS UNE PAGE POUR ENREGISTRER UNE COPIE A LOUER (NOM JEU + CONSOLE) - COUT CREDIT DEFINI PAR L'ADMIN-->
-                <Button Content="Déposer un jeu" Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" Width="110" Click="LocationsButton_Click"/>
+                <Button Content="Dépôt / Réservation  " Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" Width="150" Click="LocationsButton_Click"/>
                 <Button Content="Déconnexion" Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62"  Width="90" Click="LogoutButton_Click"/>
             </StackPanel>
         </Grid>
@@ -49,7 +48,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID Réservation" Binding="{Binding IdBooking}" />
                 <DataGridTextColumn Header="Date de réservation" Binding="{Binding BookingDate}" />
-                <DataGridTextColumn Header="ID Jeu" Binding="{Binding VideoGame}" />
+                <DataGridTextColumn Header="ID Jeu" Binding="{Binding IdVideoGame}" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -83,6 +82,6 @@
         </StackPanel>
         <Label Content="Jeux" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="10,8,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Content="Réservations" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="540,72,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <Label Content="Jeux mis en location" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="541,225,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Jeux en location" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="541,225,0,0" Grid.Row="1" VerticalAlignment="Top"/>
     </Grid>
 </Page>

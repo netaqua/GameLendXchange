@@ -66,5 +66,12 @@ namespace GameLendXchange.Classes
                 Console.WriteLine("Bonus déjà reçu ... ");
             }
         }
+
+        public bool Update(Player player)
+        {
+            PlayerDB db = new PlayerDB();
+            return db.Update(player);
+        }
+
     }
 }

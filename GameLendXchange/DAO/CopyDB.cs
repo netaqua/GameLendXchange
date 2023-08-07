@@ -49,18 +49,28 @@ namespace GameLendXchange.DAO
                         c.IdCopy = reader.GetInt32("idCopy");
                         c.Owner.IdUser = reader.GetInt32("idOwner");
                         c.VideoGame.IdGame = reader.GetInt32("idVideoGame");
+                        c.Available = reader.GetBoolean("isAvailable");
                     }
                 }
             }
             return c;
         }
 
-        public bool Udpdate(Copy c)
+        public bool Update(Copy c)
         {
             bool success = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"UPDATE dbo.copy SET idVideoGame = {c.VideoGame.IdGame}, idOwner = {c.Owner.IdUser} WHERE idCopy = {c.IdCopy}", connection);
+                int Ava = 0;
+                if(c.Available== true)
+                {
+                    Ava = 1;
+                }
+                else
+                {
+                    Ava = 0;
+                }
+                SqlCommand cmd = new SqlCommand($"UPDATE dbo.copy SET idVideoGame = {c.VideoGame.IdGame}, idOwner = {c.Owner.IdUser}, isAvailable = {Ava} WHERE idCopy = {c.IdCopy}", connection);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
                 success = res > 0;
@@ -97,6 +107,7 @@ namespace GameLendXchange.DAO
                         c.IdCopy = reader.GetInt32("idCopy");
                         c.Owner.IdUser = reader.GetInt32("idOwner");
                         c.VideoGame.IdGame = reader.GetInt32("idVideoGame");
+                        c.Available = reader.GetBoolean("isAvailable");
                         copys.Add(c);
                     }
                 }
@@ -115,7 +126,7 @@ namespace GameLendXchange.DAO
                 {
                     connection.Open();
 
-                    string query = "SELECT IdCopy, IdOwner FROM Copy WHERE IdVideoGame = @IdVideoGame";
+                    string query = "SELECT IdCopy, IdOwner, isAvailable FROM Copy WHERE IdVideoGame = @IdVideoGame";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -130,6 +141,7 @@ namespace GameLendXchange.DAO
                                 {
                                     IdCopy = Convert.ToInt32(reader["IdCopy"]),
                                     Owner = Player.GetPlayerById(Convert.ToInt32(reader["IdOwner"])),
+                                    Available = reader.GetBoolean("isAvailable"),
                                     VideoGame = VideoGame.GetGameById(idGame)
                                 };
 
