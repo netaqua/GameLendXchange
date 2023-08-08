@@ -56,7 +56,7 @@ namespace GameLendXchange.Classes
 
         public override string ToString()
         {
-            return $"Id Copy : {IdCopy}, Pseudo du préteur : {Owner}";
+            return $"Id Copy : {IdCopy}";
         }
 
 
