@@ -128,13 +128,13 @@ namespace GameLendXchange.DAO
             return loan;
         }
 
-        public List<Loan> ReadAllId(int idLender)
+        public List<Loan> ReadAllId(int idBorrower)
         {
             List<Loan> loan = new List<Loan>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"SELECT * FROM dbo.Loan WHERE idLender=@idLender", connection);
-                cmd.Parameters.AddWithValue("idLender", idLender);
+                SqlCommand cmd = new SqlCommand($"SELECT * FROM dbo.Loan WHERE idBorrower=@idBorrower", connection);
+                cmd.Parameters.AddWithValue("idBorrower", idBorrower);
                 connection.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -156,6 +156,19 @@ namespace GameLendXchange.DAO
             return loan;
         }
 
+        public bool EndLoan(int idLoan)
+        {
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand($"UPDATE dbo.Loan SET onGoing = 0 WHERE idLoan = @IdLoan", connection);
+                cmd.Parameters.AddWithValue("IdLoan", idLoan);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+            }
+            return success;
+        }
 
     }
 }

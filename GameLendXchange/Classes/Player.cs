@@ -33,7 +33,7 @@ namespace GameLendXchange.Classes
 
         public override string ToString()
         {
-            return $"Id Player : {IdUser}, Balance : {Credit}, Pseudo : {Pseudo}, Username : {Username}, Registration Date : {RegistrationDate}, Date of Birthday : {DateOfBirth}";
+            return $"Id Player : {IdUser}, Pseudo : {Pseudo}";
         }
 
         public static List<Player> GetPlayers()

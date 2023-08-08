@@ -244,5 +244,21 @@ namespace GameLendXchange.DAO
             return videoGame;
         }
 
+        public bool UpdateCreditCost(VideoGame videoGame)
+        {
+            bool success = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE dbo.VideoGame SET creditCost = @credit WHERE idVideoGame = @id", connection);
+                cmd.Parameters.AddWithValue("id", videoGame.IdGame);
+                cmd.Parameters.AddWithValue("credit", videoGame.CreditCost);
+                int res = cmd.ExecuteNonQuery();
+                success = res > 0;
+            }
+            return success;
+        }
+
+
     }
 }

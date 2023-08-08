@@ -35,6 +35,12 @@ namespace GameLendXchange.Classes
             return dB.ReadAllId(idUser);
         }
 
+        public bool EndLoan(int idLoan)
+        {
+            LoanDB db = new LoanDB();
+            return db.EndLoan(idLoan);
+        }
+
 
     }
 }

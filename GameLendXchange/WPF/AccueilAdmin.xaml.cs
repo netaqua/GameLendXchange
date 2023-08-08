@@ -69,7 +69,23 @@ namespace GameLendXchange.WPF
 
         private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
+            if (GridAdmin.SelectedItem is VideoGame selectedGame)
+            {
+                MessageBoxResult result = MessageBox.Show("Voulez-vous enregistrer la modification ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        selectedGame.UpdateCreditCost(selectedGame);
+                        GridAdmin.Items.Refresh();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Erreur lors de la mise à jour : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
         }
     }
 }

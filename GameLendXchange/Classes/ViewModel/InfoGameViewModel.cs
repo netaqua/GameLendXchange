@@ -1,67 +1,37 @@
 ﻿using GameLendXchange.Classes;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace GameLendXchange.WPF.ViewModel
 {
-    public class InfoGameViewModel : INotifyPropertyChanged
+    public class InfoGameViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private VideoGame selectedGame;
+        public string Name { get; set; }
+        public int CreditCost { get; set; }
+        public string Console { get; set; }
+        public ObservableCollection<Copy> Copies { get; set; } = new ObservableCollection<Copy>();
+        public ObservableCollection<Booking> Bookings { get; set; } = new ObservableCollection<Booking>();
 
         public InfoGameViewModel(int gameId)
         {
             // Fetch the game information based on the provided gameId
-            selectedGame = VideoGame.GetGameById(gameId);
-        }
-
-        public string Name
-        {
-            get => selectedGame?.Name;
-            set
+            VideoGame game = VideoGame.GetGameById(gameId);
+            if (game != null)
             {
-                if (selectedGame != null)
+                Name = game.Name;
+                CreditCost = game.CreditCost;
+                Console = game.Console;
+
+                // Populate the Copies and Bookings collections
+                foreach (Copy copy in game.Copies)
                 {
-                    selectedGame.Name = value;
-                    OnPropertyChanged(nameof(Name));
+                    Copies.Add(copy);
+                }
+
+                foreach (Booking booking in game.Bookings)
+                {
+                    Bookings.Add(booking);
                 }
             }
-        }
-
-        public int CreditCost
-        {
-            get => selectedGame?.CreditCost ?? 0;
-            set
-            {
-                if (selectedGame != null)
-                {
-                    selectedGame.CreditCost = value;
-                    OnPropertyChanged(nameof(CreditCost));
-                }
-            }
-        }
-
-        public string Console
-        {
-            get => selectedGame?.Console;
-            set
-            {
-                if (selectedGame != null)
-                {
-                    selectedGame.Console = value;
-                    OnPropertyChanged(nameof(Console));
-                }
-            }
-        }
-
-        public ObservableCollection<Copy> Copies => selectedGame?.Copies != null ? new ObservableCollection<Copy>(selectedGame.Copies) : new ObservableCollection<Copy>();
-
-        public ObservableCollection<Booking> Bookings => selectedGame?.Bookings != null ? new ObservableCollection<Booking>(selectedGame.Bookings) : new ObservableCollection<Booking>();
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

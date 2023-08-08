@@ -42,9 +42,21 @@ namespace GameLendXchange.Classes
 
         public void Borrow() { }
 
-        public bool IsAvailable() 
-        { 
-            return true;
+        public bool IsAvailable(Loan l)
+        {
+            if (l.OnGoing)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"Id Copy : {IdCopy}, Pseudo du préteur : {Owner}";
         }
 
 

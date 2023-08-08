@@ -82,6 +82,11 @@ namespace GameLendXchange.Classes
             return videoGame;
         }
 
+        public bool UpdateCreditCost(VideoGame videoGame)
+        {
+            VideoGameDB dB = new VideoGameDB();
+            return dB.UpdateCreditCost(videoGame);
+        }
 
     }
 }

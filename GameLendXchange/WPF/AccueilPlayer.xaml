@@ -52,7 +52,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Name="dgLoan" Grid.Row="1" AutoGenerateColumns="False" Margin="544,261,12,9" Grid.RowSpan="2">
+        <DataGrid Name="dgLoan" Grid.Row="1" AutoGenerateColumns="False" Margin="544,261,12,9" Grid.RowSpan="2" SelectionChanged="dgLoan_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID Location" Binding="{Binding IdLocation}" />
                 <DataGridTextColumn Header="Date de début" Binding="{Binding StartDate}" />
