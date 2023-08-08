@@ -58,9 +58,9 @@ namespace GameLendXchange.WPF
                        ClearFields();
                        errorMessage.Text = string.Empty;
                     }
-                            else
-                            {
-                                errorMessage.Text = "Erreur lors de l'insertion d'une copie. Veuillez vérifier les informations et réessayez.";
+                    else
+                    {
+                       errorMessage.Text = "Erreur lors de l'insertion d'une copie. Veuillez vérifier les informations et réessayez.";
                     }
                 }
                 else

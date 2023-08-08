@@ -116,10 +116,39 @@ namespace GameLendXchange.DAO
                         l.IdLoan = reader.GetInt32("idLoan");
                         l.StartDate = reader.GetDateTime("startDate");
                         l.EndDate = reader.GetDateTime("endDate");
-                        l.OnGoing = reader.GetBoolean("onGoing");
+                        l.OnGoing = reader.GetBoolean("onGoing");                 
+                        l.Lender = Player.GetPlayerById(reader.GetInt32("idLender"));
+                        l.Borrower = Player.GetPlayerById(reader.GetInt32("idBorrower"));
+                        l.Copy = new Copy();
                         l.Copy.IdCopy = reader.GetInt32("idCopy");
-                        l.Lender.IdUser = reader.GetInt32("idLender");
-                        l.Borrower.IdUser = reader.GetInt32("idBorrower");
+                        loan.Add(l);
+                    }
+                }
+            }
+            return loan;
+        }
+
+        public List<Loan> ReadAllId(int idLender)
+        {
+            List<Loan> loan = new List<Loan>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand($"SELECT * FROM dbo.Loan WHERE idLender=@idLender", connection);
+                cmd.Parameters.AddWithValue("idLender", idLender);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Loan l = new Loan();
+                        l.IdLoan = reader.GetInt32("idLoan");
+                        l.StartDate = reader.GetDateTime("startDate");
+                        l.EndDate = reader.GetDateTime("endDate");
+                        l.OnGoing = reader.GetBoolean("onGoing");
+                        l.Lender = Player.GetPlayerById(reader.GetInt32("idLender"));
+                        l.Borrower = Player.GetPlayerById(reader.GetInt32("idBorrower"));
+                        l.Copy = new Copy();
+                        l.Copy.IdCopy = reader.GetInt32("idCopy");
                         loan.Add(l);
                     }
                 }

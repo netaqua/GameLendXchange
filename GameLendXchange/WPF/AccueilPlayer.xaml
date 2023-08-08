@@ -57,8 +57,8 @@
                 <DataGridTextColumn Header="ID Location" Binding="{Binding IdLocation}" />
                 <DataGridTextColumn Header="Date de début" Binding="{Binding StartDate}" />
                 <DataGridTextColumn Header="Date de fin" Binding="{Binding EndDate}" />
-                <DataGridTextColumn Header="Activité" Binding="{Binding Activity}" />
-                <DataGridTextColumn Header="ID Emprunteur" Binding="{Binding IdBorrower}" />
+                <DataGridTextColumn Header="Activité" Binding="{Binding OnGoing}" />
+                <DataGridTextColumn Header="ID Emprunteur" Binding="{Binding Borrower}" />
                 <DataGridTextColumn Header="ID Copie" Binding="{Binding IdCopy}" />
             </DataGrid.Columns>
         </DataGrid>

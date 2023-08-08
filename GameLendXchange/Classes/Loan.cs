@@ -29,6 +29,12 @@ namespace GameLendXchange.Classes
             LoanDB db = new LoanDB();
             return db.Create(this);
         }
+        public static List<Loan> GetLoansById(int idUser)
+        {
+            LoanDB dB = new LoanDB();
+            return dB.ReadAllId(idUser);
+        }
+
 
     }
 }

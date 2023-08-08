@@ -76,7 +76,25 @@ namespace GameLendXchange.Classes.ViewModel
             }
         }
 
-        
+        public class BookingViewModel
+        {
+            public int IdBooking { get; set; }
+            public DateTime BookingDate { get; set; }
+            public int IdVideoGame { get; set; }
+        }
+
+        public class LoanViewModel
+        {
+            public int IdLocation { get; set; }
+            public DateTime StartDate { get; set; }
+            public DateTime EndDate { get; set; }
+            public bool OnGoing { get; set; }
+            public int BorrowerId { get; set; }
+            public int LenderId { get; set; }
+            public int IdCopy { get; set; }
+        }
+
+
 
         public AccueilPlayerViewModel(Player currentPlayer)
         {

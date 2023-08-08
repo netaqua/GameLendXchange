@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static GameLendXchange.Classes.ViewModel.AccueilPlayerViewModel;
 
 namespace GameLendXchange.WPF
 {
@@ -88,8 +89,15 @@ namespace GameLendXchange.WPF
             dgBooking.Columns.Add(idGameColumn);
 
             List<Booking> bookings= Booking.GetBookingsPlayer(player.IdUser);
-            
-            dgBooking.ItemsSource = bookings;
+
+            List<BookingViewModel> bookingViewModels = bookings.Select(booking => new BookingViewModel
+            {
+                IdBooking = booking.IdBooking,
+                BookingDate = booking.BookingDate,
+                IdVideoGame = booking.VideoGame.IdGame
+            }).ToList();
+
+            dgBooking.ItemsSource = bookingViewModels;
         }
 
         private void ConfigureDataGridColumnsLoan()
@@ -112,13 +120,13 @@ namespace GameLendXchange.WPF
             dgLoan.Columns.Add(endDateColumn);
 
             DataGridTextColumn activityColumn = new DataGridTextColumn();
-            activityColumn.Header = "Activité";
-            activityColumn.Binding = new Binding("Activity");
+            activityColumn.Header = "Etat location";
+            activityColumn.Binding = new Binding("OnGoing");
             dgLoan.Columns.Add(activityColumn);
 
             DataGridTextColumn idBorrowerColumn = new DataGridTextColumn();
             idBorrowerColumn.Header = "ID Emprunteur";
-            idBorrowerColumn.Binding = new Binding("IdBorrower");
+            idBorrowerColumn.Binding = new Binding("BorrowerId");
             dgLoan.Columns.Add(idBorrowerColumn);
 
             DataGridTextColumn idCopyColumn = new DataGridTextColumn();
@@ -126,14 +134,20 @@ namespace GameLendXchange.WPF
             idCopyColumn.Binding = new Binding("IdCopy");
             dgLoan.Columns.Add(idCopyColumn);
 
-            List<Loan> loans = new List<Loan>();
+            List<Loan> loans = Loan.GetLoansById(player.IdUser);
+            List<LoanViewModel> loanViewModels = loans.Select(loan => new LoanViewModel
+            {
+                IdLocation = loan.IdLoan,
+                StartDate = loan.StartDate,
+                EndDate = loan.EndDate,
+                OnGoing = loan.OnGoing,
+                BorrowerId = loan.Borrower.IdUser,
+                LenderId = loan.Lender.IdUser,
+                IdCopy = loan.Copy.IdCopy // Remplacez "IdCopy" par la propriété appropriée pour obtenir l'ID de la copie
+            }).ToList();
 
-            dgLoan.ItemsSource = loans;
+            dgLoan.ItemsSource = loanViewModels;
         }
-
-        //-------------------------------------------------------------------------------//
-        //******************** RECUPERATION DE L'ID DU TABLEAU JEU **************************************//
-        //-------------------------------------------------------------------------------//
 
         private void dgGame_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -171,10 +185,5 @@ namespace GameLendXchange.WPF
                 mainWindow.MainFrame.Navigate(setLocationPage);
             }
         }
-
-        //private void EditPlayerButton_Click(object sender, RoutedEventArgs e)
-        //{
-            
-        //}
     }
 }
