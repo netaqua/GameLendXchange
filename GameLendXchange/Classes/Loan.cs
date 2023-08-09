@@ -1,4 +1,5 @@
-﻿using GameLendXchange.DAO;
+﻿using GameLendXchange.Classes.ViewModel;
+using GameLendXchange.DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,11 @@ namespace GameLendXchange.Classes
             return db.EndLoan(idLoan);
         }
 
+        public bool CalculateBalanceCredit()
+        {
+            LoanDB db = new LoanDB();
+            return db.CalculateBalance(this.IdLoan);
+        }
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GameLendXchange.Classes;
+using GameLendXchange.Classes.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GameLendXchange.DAO
 {
@@ -170,5 +172,57 @@ namespace GameLendXchange.DAO
             return success;
         }
 
+        public bool CalculateBalance(int loanId)
+        {
+            Loan loan = new Loan();
+            Player p = new Player();
+            bool success = false;
+            bool flag = false;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand($"SELECT * FROM dbo.Loan WHERE idLoan = @IdLoan", connection);
+                cmd.Parameters.AddWithValue("@IdLoan", loanId);
+                connection.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        loan.IdLoan = reader.GetInt32("idLoan");
+                        loan.EndDate = reader.GetDateTime("endDate");
+                        loan.OnGoing = reader.GetBoolean("onGoing");
+                        loan.Borrower = Player.GetPlayerById(reader.GetInt32("idBorrower"));
+
+                        int daysLate = (int)(DateTime.Now - loan.EndDate).TotalDays;
+                        if (daysLate > 0)
+                        {
+                            int creditsToDeduct = daysLate * 5;
+                            if (creditsToDeduct > 0)
+                            {
+                                p = loan.Borrower;
+                                p.Credit -= creditsToDeduct;
+                                flag = true;     
+                            }
+                        }
+                        else
+                        {
+                            success = true;
+                        }
+                    }
+                }
+                if (flag)
+                {
+                    using (SqlConnection connection2 = new SqlConnection(connectionString))
+                    {
+                        string updateSql = "UPDATE dbo.Player SET credit = @credits WHERE idPlayer = @playerId";
+                        SqlCommand updateCmd = new SqlCommand(updateSql, connection);
+                        updateCmd.Parameters.AddWithValue("@credits", p.Credit);
+                        updateCmd.Parameters.AddWithValue("@playerId", p.IdUser);
+                        int res = updateCmd.ExecuteNonQuery();
+                        success = res > 0;
+                    }
+                }
+            }
+            return success;
+        }
     }
 }

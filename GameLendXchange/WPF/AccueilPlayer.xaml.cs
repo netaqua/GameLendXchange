@@ -1,5 +1,6 @@
 ﻿using GameLendXchange.Classes;
 using GameLendXchange.Classes.ViewModel;
+using GameLendXchange.DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -186,7 +187,7 @@ namespace GameLendXchange.WPF
             }
         }
 
-        private void dgLoan_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /*private void dgLoan_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dgLoan.SelectedItem is AccueilPlayerViewModel.LoanViewModel selectedLoan)
             {
@@ -198,7 +199,7 @@ namespace GameLendXchange.WPF
                     var succes = l.EndLoan(lId);
                     if (succes)
                     {
-                        //Ajouter la partie CalculateBalance() dans le Loan et y faire appel
+                        LoanDB.CalculateBalance(selectedLoan);
                         MessageBox.Show("Location stoppée ! (actualiser la page)");
                     }
                     else
@@ -206,6 +207,35 @@ namespace GameLendXchange.WPF
                         MessageBox.Show("Erreur impossible de stopper cette location!");
                     }
                     
+                }
+                else
+                {
+                    MessageBox.Show("Action annulée !");
+                }
+            }
+        }*/
+
+        private void dgLoan_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dgLoan.SelectedItem is AccueilPlayerViewModel.LoanViewModel selectedLoan)
+            {
+                MessageBoxResult result = MessageBox.Show($"Voulez-vous stopper la location ? {selectedLoan.IdLocation}", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    LoanDB loanDB = new LoanDB();
+                    bool succes2 = loanDB.CalculateBalance(selectedLoan.IdLocation);
+                    if (succes2)
+                    {
+                        bool success = loanDB.EndLoan(selectedLoan.IdLocation);
+                        if (success)
+                        {
+                            MessageBox.Show("Location stoppée ! (actualiser la page)");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erreur : Impossible de stopper cette location !");
+                        }
+                    }
                 }
                 else
                 {
