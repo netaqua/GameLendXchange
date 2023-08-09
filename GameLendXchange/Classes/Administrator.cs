@@ -21,5 +21,11 @@ namespace GameLendXchange.Classes
         {
             return $"Id Admin : {IdUser}, Username : {Username}";
         }
+
+        public Administrator GetAdministrator(String username, String password)
+        {
+            AdministratorDB db = new AdministratorDB();
+            return db.GetConnection(username, password);
+        }
     }
 }

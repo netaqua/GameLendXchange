@@ -42,6 +42,12 @@ namespace GameLendXchange.Classes
             return dB.ReadAll();
         }
 
+        public Player GetPlayer(string username, string password) 
+        {
+            PlayerDB dB = new PlayerDB();
+            return dB.GetConnection(username, password);
+        }
+
 
         public bool Insert()
         {
