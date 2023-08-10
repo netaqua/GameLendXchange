@@ -36,7 +36,7 @@ namespace GameLendXchange.DAO
             Copy c = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"SELECT * FROM dbo.Copy WHERE idGame='@IdVideoGame' and idOwner='@IdOwner'", connection);
+                SqlCommand cmd = new SqlCommand($"SELECT * FROM dbo.Copy WHERE idVideoGame=@IdVideoGame and idOwner=@IdOwner", connection);
 
                 cmd.Parameters.AddWithValue("IdVideoGame", idGame);
                 cmd.Parameters.AddWithValue("IdOwner", idOwner);
@@ -47,8 +47,8 @@ namespace GameLendXchange.DAO
                     {
                         c = new Copy();
                         c.IdCopy = reader.GetInt32("idCopy");
-                        c.Owner.IdUser = reader.GetInt32("idOwner");
-                        c.VideoGame.IdGame = reader.GetInt32("idVideoGame");
+                        c.Owner = Player.GetPlayerById(Convert.ToInt32(reader["IdOwner"]));
+                        c.VideoGame = VideoGame.ReadId(idGame);
                         c.Available = reader.GetBoolean("isAvailable");
                     }
                 }
@@ -142,7 +142,7 @@ namespace GameLendXchange.DAO
                                     IdCopy = Convert.ToInt32(reader["IdCopy"]),
                                     Owner = Player.GetPlayerById(Convert.ToInt32(reader["IdOwner"])),
                                     Available = reader.GetBoolean("isAvailable"),
-                                    VideoGame = VideoGame.GetGameById(idGame)
+                                    VideoGame = VideoGame.ReadId(idGame)
                                 };
 
                                 copies.Add(copy);

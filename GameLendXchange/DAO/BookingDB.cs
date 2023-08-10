@@ -74,7 +74,7 @@ namespace GameLendXchange.DAO
             bool success = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"DELETE FROM dbo.Loan WHERE idBooking = {b.IdBooking}", connection);
+                SqlCommand cmd = new SqlCommand($"DELETE FROM dbo.Booking WHERE idBooking = {b.IdBooking}", connection);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
                 success = res > 0;

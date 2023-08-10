@@ -37,5 +37,11 @@ namespace GameLendXchange.Classes
             BookingDB db = new BookingDB();
             return db.Create(this);
         }
+
+        public bool Delete()
+        {
+            BookingDB db = new BookingDB();
+            return db.Delete(this);
+        }
     }
 }

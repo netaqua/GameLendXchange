@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +23,12 @@ namespace GameLendXchange.Classes
                 CopyDB db = new CopyDB();
                 return db.ReadAllCopiesByVideoGame(idGame);
             }
+
+        public Copy ReadByOwnerAndGame(int idGame, int idOwner)
+        {
+            CopyDB dB= new CopyDB();
+            return dB.Read(idGame, idOwner);
+        }
 
         public bool Insert()
         {

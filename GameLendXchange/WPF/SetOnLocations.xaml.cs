@@ -80,7 +80,7 @@ namespace GameLendXchange.WPF
 
             if (dgGame.SelectedItem is VideoGame selectedGame) 
             {
-                VideoGame videoGame = VideoGame.GetGameById(selectedGame.IdGame);
+                VideoGame videoGame = VideoGame.ReadId(selectedGame.IdGame);
 
                 if (videoGame != null)
                 {
@@ -88,26 +88,53 @@ namespace GameLendXchange.WPF
                     c.Owner = player;
 
                     bool success = c.Insert();
+                    c = c.ReadByOwnerAndGame(videoGame.IdGame, player.IdUser);
 
                     if (success)
                     {
                         List<Booking> bookings = Booking.GetBookingsVideoGame(selectedGame.IdGame);
+                        bool successLocation = false;
 
                         if(bookings.Count > 0)
                         {
-                            Booking bookTmp = new Booking();
-                            Player p = new Player();
-                            for (i = 0; i < bookings.Count ; i ++)
+                            Booking selectedBooking = bookings
+                            .OrderByDescending(b => b.Player.Credit)
+                            .ThenBy(b => b.BookingDate)
+                            .ThenBy(b => b.Player.RegistrationDate)
+                            .ThenBy(b => b.Player.DateOfBirth)
+                            .FirstOrDefault();
+
+                            Loan lNew= new Loan();
+                            lNew.Copy = c;
+                            lNew.Borrower = selectedBooking.Player;
+                            lNew.StartDate = DateTime.Now;
+                            lNew.EndDate = DateTime.Now.AddDays(7);
+                            lNew.Lender = player;
+                            lNew.OnGoing= true;
+                           
+
+                            if(selectedBooking.VideoGame.CreditCost < lNew.Borrower.Credit)
                             {
-                                if (bookings[i].Player.Credit > p.Credit)
+                                bool succesLocation = lNew.insert();
+                                lNew.Borrower.Credit -= videoGame.CreditCost;
+                                lNew.Borrower.Update(lNew.Borrower);
+                                if(succesLocation)
                                 {
-                                    p = bookings[i].Player;
-                                    bookTmp = bookings[i]; 
-                                }else if (bookings[i].BookingDate < bookTmp.BookingDate)
-                                {
-                                    bookTmp = bookings[i];
+                                    bool DelBook = selectedBooking.Delete();
+                                    if(DelBook)
+                                    {
+                                        validateMessage.Text = "Jeu directement emprunter par un joueur";
+                                        c.Borrow();
+                                    }
+                                    
                                 }
                             }
+                            else
+                            {
+                                errorMessage.Text = "L'emprunteur n'a pas assez de credit";
+                            }
+
+
                         }
                         else
                         {

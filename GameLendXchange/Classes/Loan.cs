@@ -48,11 +48,5 @@ namespace GameLendXchange.Classes
             return db.CalculateBalance(this.IdLoan);
         }
 
-        public void BookingToLoanToPlayer(int idGame)
-        {
-            LoanDB db = new LoanDB();
-            db.BookingToLoanToPlayer(idGame);
-        }
-
     }
 }

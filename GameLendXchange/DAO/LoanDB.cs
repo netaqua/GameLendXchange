@@ -176,6 +176,7 @@ namespace GameLendXchange.DAO
         {
             Loan loan = new Loan();
             Player p = new Player();
+            Player p2 = new Player();
             bool success = false;
             bool flag = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -191,6 +192,7 @@ namespace GameLendXchange.DAO
                         loan.EndDate = reader.GetDateTime("endDate");
                         loan.OnGoing = reader.GetBoolean("onGoing");
                         loan.Borrower = Player.GetPlayerById(reader.GetInt32("idBorrower"));
+                        loan.Lender = Player.GetPlayerById(reader.GetInt32("idLender"));
 
                         int daysLate = (int)(DateTime.Now - loan.EndDate).TotalDays;
                         if (daysLate > 0)
@@ -199,7 +201,9 @@ namespace GameLendXchange.DAO
                             if (creditsToDeduct > 0)
                             {
                                 p = loan.Borrower;
+                                p2 = loan.Lender;
                                 p.Credit -= creditsToDeduct;
+                                p2.Credit += creditsToDeduct;
                                 flag = true;     
                             }
                         }
@@ -220,16 +224,21 @@ namespace GameLendXchange.DAO
                         int res = updateCmd.ExecuteNonQuery();
                         success = res > 0;
                     }
+
+                    using (SqlConnection connection3 = new SqlConnection(connectionString))
+                    {
+                        string updateSql = "UPDATE dbo.Player SET credit = @credits WHERE idPlayer = @playerId";
+                        SqlCommand updateCmd = new SqlCommand(updateSql, connection);
+                        updateCmd.Parameters.AddWithValue("@credits", p2.Credit);
+                        updateCmd.Parameters.AddWithValue("@playerId", p2.IdUser);
+                        int res = updateCmd.ExecuteNonQuery();
+                    }
+
                 }
             }
             return success;
         }
 
-        public void BookingToLoanToPlayer(int idGame)
-        {
-            List<Booking> bookings = new List<Booking>();
-            
 
-        }
     }
 }

@@ -187,34 +187,6 @@ namespace GameLendXchange.WPF
             }
         }
 
-        /*private void dgLoan_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (dgLoan.SelectedItem is AccueilPlayerViewModel.LoanViewModel selectedLoan)
-            {
-                MessageBoxResult result = MessageBox.Show("Voulez-vous stopper la location ? "+ selectedLoan.IdLocation, "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                int lId = selectedLoan.IdLocation;
-                Loan l = new Loan();
-                if (result == MessageBoxResult.Yes)
-                {
-                    var succes = l.EndLoan(lId);
-                    if (succes)
-                    {
-                        LoanDB.CalculateBalance(selectedLoan);
-                        MessageBox.Show("Location stoppée ! (actualiser la page)");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Erreur impossible de stopper cette location!");
-                    }
-                    
-                }
-                else
-                {
-                    MessageBox.Show("Action annulée !");
-                }
-            }
-        }*/
-
         private void dgLoan_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dgLoan.SelectedItem is AccueilPlayerViewModel.LoanViewModel selectedLoan)
