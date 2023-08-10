@@ -28,117 +28,174 @@ namespace GameLendXchange.WPF
         public SetOnLocations(Player p)
         {
             InitializeComponent();
+            ConfigureDataGridColumns();
             player = p;
             AccueilPlayerViewModel viewModel = new AccueilPlayerViewModel(p);
         }
+
+        // BOUTON DE RENVOI VERS L'ACCUEIL PLAYER //
 
          private void backBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AccueilPlayer(player));
         }
 
+        // CONFIGURATION DES COLONNES DU DATAGRID //
+
+        private void ConfigureDataGridColumns()
+        {
+
+            dgGame.Columns.Clear(); 
+
+            DataGridTextColumn idColumn = new DataGridTextColumn();
+            idColumn.Header = "ID";
+            idColumn.Binding = new Binding("IdGame");
+            dgGame.Columns.Add(idColumn);
+
+            DataGridTextColumn nameColumn = new DataGridTextColumn();
+            nameColumn.Header = "Nom du jeu";
+            nameColumn.Binding = new Binding("Name");
+            dgGame.Columns.Add(nameColumn);
+
+            DataGridTextColumn creditCostColumn = new DataGridTextColumn();
+            creditCostColumn.Header = "Coût en crédits";
+            creditCostColumn.Binding = new Binding("CreditCost");
+            dgGame.Columns.Add(creditCostColumn);
+
+            DataGridTextColumn consoleColumn = new DataGridTextColumn();
+            consoleColumn.Header = "Console";
+            consoleColumn.Binding = new Binding("Console");
+            dgGame.Columns.Add(consoleColumn);
+
+            List<VideoGame> videoGames = VideoGame.GetGames();
+            dgGame.ItemsSource = videoGames;
+        }
+
+        // METHODE DE DEPÔT D'UN JEU //
+
         private void DepositBtn_Click(object sender, RoutedEventArgs e)
         {
             Copy c = new Copy();
+            int i;
 
-            if (int.TryParse(idGameText.Text, out int gameId))
+            if (dgGame.SelectedItem is VideoGame selectedGame) 
             {
-                VideoGame videoGame = VideoGame.GetGameById(gameId);
+                VideoGame videoGame = VideoGame.GetGameById(selectedGame.IdGame);
 
                 if (videoGame != null)
                 {
                     c.VideoGame = videoGame;
-
                     c.Owner = player;
 
                     bool success = c.Insert();
 
                     if (success)
                     {
-                       ClearFields();
-                       errorMessage.Text = string.Empty;
+                        List<Booking> bookings = Booking.GetBookingsVideoGame(selectedGame.IdGame);
+
+                        if(bookings.Count > 0)
+                        {
+                            Booking bookTmp = new Booking();
+                            Player p = new Player();
+                            for (i = 0; i < bookings.Count ; i ++)
+                            {
+                                if (bookings[i].Player.Credit > p.Credit)
+                                {
+                                    p = bookings[i].Player;
+                                    bookTmp = bookings[i]; 
+                                }else if (bookings[i].BookingDate < bookTmp.BookingDate)
+                                {
+                                    bookTmp = bookings[i];
+                                }
+                            }
+                        }
+                        else
+                        {
+                            validateMessage.Text = "Jeu déposé avec succès";
+                            errorMessage.Text = string.Empty;
+                        }
                     }
                     else
                     {
-                       errorMessage.Text = "Erreur lors de l'insertion d'une copie. Veuillez vérifier les informations et réessayez.";
+                        errorMessage.Text = "Erreur lors de l'insertion d'une copie. Veuillez vérifier les informations et réessayez.";
                     }
                 }
                 else
                 {
-                    errorMessage.Text = "Aucun jeu trouvé avec cet ID.";
+                    errorMessage.Text = "Erreur";
                 }
             }
             else
             {
-                errorMessage.Text = "L'ID du jeu doit être un entier valide.";
+                errorMessage.Text = "Veuillez sélectionner un jeu dans la liste.";
             }
         }
 
 
-        private void ClearFields()
-        {
-            idGameText = null;
-        }
 
-        private void LoanBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if(int.TryParse(idGameText.Text, out int gameId))
+
+
+        // METHODE DE LOCATION D'UN JEU //
+
+        
+         private void LoanBtn_Click(object sender, RoutedEventArgs e)
+         {
+            if (dgGame.SelectedItem is VideoGame selectedGame)
             {
-                List<Copy> copies= Copy.GetCopiesByVideoGame(gameId);
-                Loan loan= new Loan();
-                Copy copieFind = copies.Find(c =>c.Available==true);
-                if (copieFind != null)
-                {
-                    if (copieFind.VideoGame.CreditCost <= player.Credit)
-                    {
-                        loan.Copy = copieFind;
-                        loan.Borrower = player;
-                        loan.Lender = copieFind.Owner;
-                        loan.OnGoing = true;
-                        DateTime now = DateTime.Now;
-                        loan.StartDate = now;
-                        loan.EndDate = now.AddDays(7);
-                        player.Credit -= copieFind.VideoGame.CreditCost;
-                        
-                        var succes = player.Update(player);
-                        if (succes)
-                        {
-                            copieFind.Available = false;
-                            copieFind.Update();
-                            loan.insert();
-                            loan.Lender.Credit += copieFind.VideoGame.CreditCost;
-                            var succesP2 = player.Update(loan.Lender);
-                            validateMessage.Text = "Location réalisé";
-                        }
-                        else
-                        {
-                            errorMessage.Text = "Erreur lors de la modification des crédits";
-                        }
-                    }
-                    else
-                    {
-                        errorMessage.Text = "Pas assez de crédit pour le jeu";
-                    }
-                }
-                else
-                {
-                    
-                    Booking booking = new Booking();
-                    booking.Player = player;
-                    booking.VideoGame = VideoGame.ReadId(gameId);
-                    DateTime now= DateTime.Now;
-                    booking.BookingDate = now;
-                    var succesBook = booking.Insert();
-                    if (succesBook)
-                    {
-                        errorMessage.Text = "Copie non dispo pour le moment, réservation réalisée";
-                    }
-                    else
-                    {
-                        errorMessage.Text = "Copie non dispo pour le moment, mais réservation impossible";
-                    }
-                }
-            }
-        }
+                List<Copy> copies= Copy.GetCopiesByVideoGame(selectedGame.IdGame);
+                Loan loan = new Loan();
+                 Copy copieFind = selectedGame.CopyAvailable(copies);
+                 if (copieFind != null)
+                 {
+                     if (player.LoanAllowed(selectedGame.CreditCost,player))
+                     {
+                         loan.Copy = copieFind;
+                         loan.Borrower = player;
+                         loan.Lender = copieFind.Owner;
+                         loan.OnGoing = true;
+                         DateTime now = DateTime.Now;
+                         loan.StartDate = now;
+                         loan.EndDate = now.AddDays(7);
+                         player.Credit -= copieFind.VideoGame.CreditCost;
+
+                         var succes = player.Update(player);
+                         if (succes)
+                         {
+                             copieFind.Borrow();
+                             loan.insert();
+                             loan.Lender.Credit += copieFind.VideoGame.CreditCost;
+                             var succesP2 = player.Update(loan.Lender);
+                             validateMessage.Text = "Location réalisé";
+                         }
+                         else
+                         {
+                             errorMessage.Text = "Erreur lors de la modification des crédits";
+                         }
+                     }
+                     else
+                     {
+                         errorMessage.Text = "Pas assez de crédit pour le jeu";
+                     }
+                 }
+                 else
+                 {
+
+                     Booking booking = new Booking();
+                     booking.Player = player;
+                     booking.VideoGame = VideoGame.ReadId(selectedGame.IdGame);
+                     DateTime now= DateTime.Now;
+                     booking.BookingDate = now;
+                     var succesBook = booking.Insert();
+                     if (succesBook)
+                     {
+                         errorMessage.Text = "Copie non dispo pour le moment, réservation réalisée";
+                     }
+                     else
+                     {
+                         errorMessage.Text = "Copie non dispo pour le moment, mais réservation impossible";
+                     }
+                 }
+             }
+         }
     }
 }

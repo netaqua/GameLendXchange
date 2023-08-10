@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GameLendXchange.DAO
 {
@@ -192,22 +193,6 @@ namespace GameLendXchange.DAO
              return p;
          }
 
-
-        /*public bool Insert(Player p)
-        {
-            bool success = false;
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand($"INSERT into dbo.Player(username,password,dateOfBirth, registrationDate,pseudo, credit) values ('{p.Username}','{p.Password}','{p.DateOfBirth}','{p.RegistrationDate}','{p.Pseudo}','{p.Credit}')", connection);
-                connection.Open(); // permet d'excécuter une commande d'insert / update / delete
-                int res = cmd.ExecuteNonQuery();
-                success = res > 0;
-            }
-
-            return success;
-        }*/
-
-        //Test d'un autre type de insert
         public bool Insert(Player p)
         {
             bool success = false;
@@ -309,6 +294,18 @@ namespace GameLendXchange.DAO
                 {
                     Console.WriteLine("Vous avez déjà reçu votre bonus d'anniversaire ...");
                 }
+            }
+        }
+
+        public bool LoanAllowed(int creditCost, Player p)
+        {
+            if(creditCost <= p.Credit)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

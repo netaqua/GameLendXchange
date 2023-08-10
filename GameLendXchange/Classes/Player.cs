@@ -79,5 +79,11 @@ namespace GameLendXchange.Classes
             return db.Update(player);
         }
 
+        public bool LoanAllowed(int creditCost, Player p)
+        {
+            PlayerDB db = new PlayerDB();
+            return db.LoanAllowed(creditCost, p);
+        }
+
     }
 }

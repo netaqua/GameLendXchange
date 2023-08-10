@@ -21,7 +21,7 @@ namespace GameLendXchange.DAO
         public bool Create(Copy c)
         {
             bool success = false;
-            using (SqlConnection connection = new SqlConnection(connectionString)) // Pas oublier l'auto_incrementation dans la base de donnée pour l'ID
+            using (SqlConnection connection = new SqlConnection(connectionString)) 
             {
                 SqlCommand cmd = new SqlCommand($"INSERT INTO dbo.Copy(idVideoGame, idOwner) VALUES({c.VideoGame.IdGame}, {c.Owner.IdUser})", connection);
                 connection.Open();
@@ -158,6 +158,26 @@ namespace GameLendXchange.DAO
             }
 
             return copies;
+        }
+
+        public void ReleaseCopy(int cId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand($"UPDATE dbo.copy SET isAvailable = 1 WHERE idCopy = {cId}", connection);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void Borrow(Copy c)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand($"UPDATE dbo.copy SET isAvailable = 0 WHERE idCopy = {c.IdCopy}", connection);
+                connection.Open();
+                int res = cmd.ExecuteNonQuery();
+            }
         }
 
     }

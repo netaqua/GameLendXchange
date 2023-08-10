@@ -35,12 +35,10 @@ namespace GameLendXchange.Classes
             return db.Update(this);
         }
 
-        public void RealeaseCopy()
-        {
-
+        public void Borrow() {
+            CopyDB db = new CopyDB();
+            db.Borrow(this);
         }
-
-        public void Borrow() { }
 
         public bool IsAvailable(Loan l)
         {
@@ -52,6 +50,12 @@ namespace GameLendXchange.Classes
             {
                 return false;
             }
+        }
+
+        public void ReleaseCopy(int cId)
+        {
+            CopyDB db = new CopyDB();
+            db.ReleaseCopy(cId);
         }
 
         public override string ToString()

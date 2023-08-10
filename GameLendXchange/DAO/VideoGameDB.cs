@@ -259,6 +259,57 @@ namespace GameLendXchange.DAO
             return success;
         }
 
+        // Méthode pour récupérer toutes les réservations d'un jeu à partir de son identifiant
+        public List<Booking> SelectBooking(int idGame)
+        {
+            List<Booking> bookings = new List<Booking>();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "SELECT IdBooking, BookingDate, IdPlayer FROM Booking WHERE IdVideoGame = @IdVideoGame";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@IdVideoGame", idGame);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Créer un nouvel objet Booking avec les données de la base de données
+                                Booking booking = new Booking
+                                {
+                                    IdBooking = Convert.ToInt32(reader["IdBooking"]),
+                                    BookingDate = Convert.ToDateTime(reader["BookingDate"]),
+                                    Player = Player.GetPlayerById(Convert.ToInt32(reader["IdPlayer"])),
+                                    VideoGame = VideoGame.GetGameById(idGame)
+                                };
+
+                                bookings.Add(booking);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Gérer les erreurs de lecture de la base de données
+                Console.WriteLine("Erreur lors de la lecture des réservations : " + ex.Message);
+            }
+
+            return bookings;
+        }
+
+        public Copy CopyAvailable(List<Copy> copies)
+        {
+            Copy copyFind = new Copy();
+            copyFind = copies.Find(c => c.Available == true);
+            return copyFind;
+        }
 
     }
 }

@@ -224,5 +224,12 @@ namespace GameLendXchange.DAO
             }
             return success;
         }
+
+        public void BookingToLoanToPlayer(int idGame)
+        {
+            List<Booking> bookings = new List<Booking>();
+            
+
+        }
     }
 }

@@ -229,6 +229,9 @@ namespace GameLendXchange.WPF
                         bool success = loanDB.EndLoan(selectedLoan.IdLocation);
                         if (success)
                         {
+                            int cId = selectedLoan.IdCopy;
+                            Copy c = new Copy();
+                            c.ReleaseCopy(cId);
                             MessageBox.Show("Location stoppée ! (actualiser la page)");
                         }
                         else

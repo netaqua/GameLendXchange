@@ -30,14 +30,14 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <Label Grid.Column="1" Content="Username" FontFamily="Georgia" FontSize="30" HorizontalAlignment="Left" Margin="244,71,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Grid.Column="1" Content="Password" FontFamily="Georgia" FontSize="30" HorizontalAlignment="Left" Margin="253,157,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <TextBox x:Name="usernameTextBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="513,71,0,0" Grid.Row="2" FontSize="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="224"/>
-        <PasswordBox x:Name="passwordTextBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="513,0,0,0" Grid.Row="2" FontSize="30" VerticalAlignment="Center" Width="224" />
+        <Label Grid.Column="1" Content="Username" FontFamily="Georgia" FontSize="30" HorizontalAlignment="Left" Margin="157,71,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <Label Grid.Column="1" Content="Password" FontFamily="Georgia" FontSize="30" HorizontalAlignment="Left" Margin="157,155,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <TextBox x:Name="usernameTextBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="364,75,0,0" Grid.Row="2" FontSize="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="287" RenderTransformOrigin="0.263,0.573"/>
+        <PasswordBox x:Name="passwordTextBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="364,156,0,0" Grid.Row="2" FontSize="30" VerticalAlignment="Top" Width="289" />
         <Button x:Name="backBtn" Grid.Column="1" Content="Go Back" FontFamily="Verdana" FontSize="11" Background="GhostWhite" BorderBrush="#FBDA62" HorizontalAlignment="Left" Height="34" Margin="849,33,0,0" VerticalAlignment="Top" Width="114" Click="backBtn_Click"/>
-        <Button x:Name="LoginBtn" Grid.Column="1" FontFamily="Verdana" FontSize="11" Background="#FBDA62" BorderBrush="WhiteSmoke" Content="Login" FontWeight="Black" HorizontalAlignment="Center" Margin="0,246,0,0" Grid.Row="2" VerticalAlignment="Top" Height="40" Width="402" Click="LoginBtn_Click"/>
-        <Image Source="../Pictures\Logo_nom_slogan.png" Grid.ColumnSpan="2" Margin="-251,10,579,6" />
+        <Button x:Name="LoginBtn" Grid.Column="1" FontFamily="Verdana" FontSize="11" Background="#FBDA62" BorderBrush="WhiteSmoke" Content="Login" FontWeight="Black" HorizontalAlignment="Left" Margin="166,265,0,0" Grid.Row="2" VerticalAlignment="Top" Height="40" Width="488" Click="LoginBtn_Click"/>
+        <Image Source="../Pictures\Logo_nom_slogan.png" Grid.ColumnSpan="2" Margin="-264,10,592,19" />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="356,0,0,0" FontFamily="Georgia" Text="It's time to log" TextAlignment="Center" FontWeight="SemiBold" FontSize="30" Foreground="Black" Width="234" Grid.Column="1"/>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Georgia" TextAlignment="Center" FontWeight="SemiBold" FontSize="30" Foreground="Black" Width="234" Grid.Column="1" Grid.Row="2"><Run Language="fr-fr" Text="Connexion"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Georgia" TextAlignment="Center" FontWeight="SemiBold" FontSize="30" Foreground="Black" Width="234" Grid.Column="1" Grid.Row="2" Margin="338,2,0,0"><Run Language="fr-fr" Text="Connexion"/></TextBlock>
     </Grid>
 </Page>

@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -168,46 +169,41 @@ namespace GameLendXchange.DAO
             return bookings;
         }
 
-        // Méthode pour récupérer toutes les réservations d'un jeu à partir de son identifiant
-        public List<Booking> ReadAllBookingsByVideoGame(int idGame)
+        public List<Booking> ReadAllBookingVideoGame(int idGame)
         {
             List<Booking> bookings = new List<Booking>();
 
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                string query = "SELECT * FROM dbo.Booking WHERE idVideoGame = @idGame";
+
+                using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
+                    cmd.Parameters.AddWithValue("@idGame", idGame);
                     connection.Open();
 
-                    string query = "SELECT IdBooking, BookingDate, IdPlayer FROM Booking WHERE IdVideoGame = @IdVideoGame";
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        command.Parameters.AddWithValue("@IdVideoGame", idGame);
-
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
+                            VideoGame game = VideoGame.ReadId(idGame);
+                            int idPlayer = reader.GetInt32(reader.GetOrdinal("idPlayer"));
+                            Player player = Player.GetPlayerById(idPlayer);
+                            if (game != null && player != null)
                             {
-                                // Créer un nouvel objet Booking avec les données de la base de données
                                 Booking booking = new Booking
                                 {
-                                    IdBooking = Convert.ToInt32(reader["IdBooking"]),
-                                    BookingDate = Convert.ToDateTime(reader["BookingDate"]),
-                                    Player = Player.GetPlayerById(Convert.ToInt32(reader["IdPlayer"])),
-                                    VideoGame = VideoGame.GetGameById(idGame)
+                                    IdBooking = reader.GetInt32(reader.GetOrdinal("idBooking")),
+                                    BookingDate = reader.GetDateTime(reader.GetOrdinal("bookingDate")),
+                                    Player = player,
+                                    VideoGame = game, 
                                 };
-
                                 bookings.Add(booking);
                             }
+
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                // Gérer les erreurs de lecture de la base de données
-                Console.WriteLine("Erreur lors de la lecture des réservations : " + ex.Message);
             }
 
             return bookings;

@@ -26,11 +26,10 @@ namespace GameLendXchange.Classes
             BookingDB dB = new BookingDB();
             return dB.ReadAllBookingPlayer(idPlayer);
         }
-
-        public static List<Booking> GetBookingsByVideoGame(int idGame)
+        public static List<Booking> GetBookingsVideoGame(int idGame)
         {
-            BookingDB db = new BookingDB();
-            return db.ReadAllBookingsByVideoGame(idGame);
+            BookingDB dB = new BookingDB();
+            return dB.ReadAllBookingVideoGame(idGame);
         }
 
         public bool Insert()
@@ -38,6 +37,5 @@ namespace GameLendXchange.Classes
             BookingDB db = new BookingDB();
             return db.Create(this);
         }
-
     }
 }

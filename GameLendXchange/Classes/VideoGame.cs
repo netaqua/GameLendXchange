@@ -75,7 +75,7 @@ namespace GameLendXchange.Classes
                 videoGame.Copies = copies;
 
                 // Récupérer les réservations associées au jeu
-                List<Booking> bookings = Booking.GetBookingsByVideoGame(idGame);
+                List<Booking> bookings = SelectBooking(idGame);
                 videoGame.Bookings = bookings;
             }
 
@@ -86,6 +86,18 @@ namespace GameLendXchange.Classes
         {
             VideoGameDB dB = new VideoGameDB();
             return dB.UpdateCreditCost(videoGame);
+        }
+
+        public static List<Booking> SelectBooking(int idGame)
+        {
+            VideoGameDB db = new VideoGameDB();
+            return db.SelectBooking(idGame);
+        }
+
+        public Copy CopyAvailable(List<Copy> copies)
+        {
+            VideoGameDB db = new VideoGameDB();
+            return db.CopyAvailable(copies);
         }
 
     }
