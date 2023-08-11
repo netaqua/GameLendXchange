@@ -69,9 +69,5 @@ namespace GameLendXchange.Classes
         {
             return $"Id Copy : {IdCopy}";
         }
-
-
-    }
-
-    
+    }  
 }

@@ -136,7 +136,6 @@ namespace GameLendXchange.DAO
                         {
                             while (reader.Read())
                             {
-                                // Créer un nouvel objet Copy avec les données de la base de données
                                 Copy copy = new Copy
                                 {
                                     IdCopy = Convert.ToInt32(reader["IdCopy"]),
@@ -153,7 +152,6 @@ namespace GameLendXchange.DAO
             }
             catch (Exception ex)
             {
-                // Gérer les erreurs de lecture de la base de données
                 Console.WriteLine("Erreur lors de la lecture des copies : " + ex.Message);
             }
 
@@ -179,6 +177,5 @@ namespace GameLendXchange.DAO
                 int res = cmd.ExecuteNonQuery();
             }
         }
-
     }
 }

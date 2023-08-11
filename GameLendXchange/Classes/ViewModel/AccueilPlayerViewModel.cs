@@ -101,12 +101,8 @@ namespace GameLendXchange.Classes.ViewModel
             PlayerPseudo = currentPlayer.Pseudo;
             PlayerCredit = currentPlayer.Credit;
             PlayerRegistrationDate = currentPlayer.RegistrationDate;
-            PlayerDateOfBirth = currentPlayer.DateOfBirth;
-
-            
-        }
-
-  
+            PlayerDateOfBirth = currentPlayer.DateOfBirth;            
+        } 
     }
 }
 

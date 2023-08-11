@@ -37,10 +37,6 @@ namespace GameLendXchange.WPF
             ConfigureDataGridColumnsLoan();
         }
 
-        //-------------------------------------------------------------------------------//
-        //******************** GESTION DES DATA GRID ************************************//
-        //-------------------------------------------------------------------------------//
-
         private void ConfigureDataGridColumnsGames()
         {
 
@@ -144,7 +140,7 @@ namespace GameLendXchange.WPF
                 OnGoing = loan.OnGoing,
                 BorrowerId = loan.Borrower.IdUser,
                 LenderId = loan.Lender.IdUser,
-                IdCopy = loan.Copy.IdCopy // Remplacez "IdCopy" par la propriété appropriée pour obtenir l'ID de la copie
+                IdCopy = loan.Copy.IdCopy 
             }).ToList();
 
             dgLoan.ItemsSource = loanViewModels;
@@ -157,10 +153,6 @@ namespace GameLendXchange.WPF
                 NavigationService?.Navigate(new InfoGame(selectedGame.IdGame));
             }
         }
-
-        //-------------------------------------------------------------------------------//
-        //******************** GESTION DES BOUTONS **************************************//
-        //-------------------------------------------------------------------------------//
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
@@ -191,7 +183,7 @@ namespace GameLendXchange.WPF
         {
             if (dgLoan.SelectedItem is AccueilPlayerViewModel.LoanViewModel selectedLoan)
             {
-                MessageBoxResult result = MessageBox.Show($"Voulez-vous stopper la location ? {selectedLoan.IdLocation}", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show($"Voulez-vous stopper la location ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     LoanDB loanDB = new LoanDB();

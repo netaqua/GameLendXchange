@@ -39,13 +39,13 @@ namespace GameLendXchange.DAO
                         p.Credit = reader.GetInt32("credit");
                         p.Pseudo = reader.GetString("pseudo");
                         p.Username = reader.GetString("username");
-                        p.Password = reader.GetString("password");//Il Faut l'ajouter a player pour pouvoir verifier que la connection peut se faire
+                        p.Password = reader.GetString("password");
                         p.RegistrationDate = reader.GetDateTime("registrationDate");
                         p.DateOfBirth = reader.GetDateTime("dateOfBirth");
                     }
                 }
             }
-            return p;//Ne pas oublier de verifier si les information sont entré pour une connection, sinon accè bloqué.
+            return p;
         }
 
         public bool Create(Player p)
@@ -56,7 +56,7 @@ namespace GameLendXchange.DAO
                 try
                 {
                     SqlCommand cmd = new SqlCommand($"INSERT into dbo.Player(username,password,dateOfBirth, registrationDate,pseudo) values ('{p.Username}','{p.Password}','{p.RegistrationDate:yyyy-MM-dd}', '{p.DateOfBirth:yyyy-MM-dd}','{p.Pseudo}')", connection); 
-                    connection.Open(); // permet d'exécuter une commande d'insert / update / delete
+                    connection.Open(); 
                     int res = cmd.ExecuteNonQuery();
                     success = res > 0;
                 }
@@ -64,8 +64,6 @@ namespace GameLendXchange.DAO
                 {
                     if (ex.Number == 2627) // Numéro d'erreur spécifique pour la violation de contrainte d'unicité
                     {
-                        // Gérer ici le cas où le nom d'utilisateur est déjà présent
-                        // par exemple, afficher un message d'erreur ou effectuer une autre action appropriée
                         Console.WriteLine("Le nom d'utilisateur ou le pseudo est déjà utilisé.");
                     }
                     else
@@ -96,7 +94,7 @@ namespace GameLendXchange.DAO
                         p.Credit = reader.GetInt32("credit");
                         p.Username = reader.GetString("username");
                         p.Pseudo = reader.GetString("pseudo");
-                        p.Password = reader.GetString("password");//Il Faut l'ajouter a player pour pouvoir verifier que la connection peut se faire
+                        p.Password = reader.GetString("password");
                         p.RegistrationDate = reader.GetDateTime("registrationDate");
                         p.DateOfBirth = reader.GetDateTime("dateOfBirth");
                     }
@@ -157,7 +155,7 @@ namespace GameLendXchange.DAO
                         player.Credit = reader.GetInt32("credit");
                         player.Pseudo = reader.GetString("pseudo");
                         player.Username = reader.GetString("username");
-                        player.Password = reader.GetString("password");//Il Faut l'ajouter a player pour pouvoir verifier que la connection peut se faire
+                        player.Password = reader.GetString("password");
                         player.RegistrationDate = reader.GetDateTime("registrationDate");
                         player.DateOfBirth = reader.GetDateTime("dateOfBirth");
                         players.Add(player);
@@ -166,7 +164,7 @@ namespace GameLendXchange.DAO
             }
             return players;
         }
-        public Player ReadPlayer(String playerUsername, String playerPassword)       //modifier pour n'avoir que les infos de son Player
+        public Player ReadPlayer(String playerUsername, String playerPassword)       
          {
              Player p = new Player();
              using (SqlConnection connection = new SqlConnection(connectionString))
@@ -184,7 +182,7 @@ namespace GameLendXchange.DAO
                         p.Credit = reader.GetInt32("credit");
                         p.Username = reader.GetString("username");
                         p.Pseudo = reader.GetString("pseudo");
-                        p.Password = reader.GetString("password");//Il Faut l'ajouter a player pour pouvoir verifier que la connection peut se faire
+                        p.Password = reader.GetString("password");
                         p.RegistrationDate = reader.GetDateTime("registrationDate");
                         p.DateOfBirth = reader.GetDateTime("dateOfBirth");
                     }
@@ -201,16 +199,14 @@ namespace GameLendXchange.DAO
                 try
                 {
                     SqlCommand cmd = new SqlCommand($"INSERT into dbo.Player(username,password,dateOfBirth, registrationDate,pseudo) values ('{p.Username}','{p.Password}','{p.DateOfBirth}','{p.RegistrationDate}','{p.Pseudo}')", connection);
-                    connection.Open(); // permet d'exécuter une commande d'insert / update / delete
+                    connection.Open(); 
                     int res = cmd.ExecuteNonQuery();
                     success = res > 0;
                 }
                 catch (SqlException ex)
                 {
-                    if (ex.Number == 2627) // Numéro d'erreur spécifique pour la violation de contrainte d'unicité
+                    if (ex.Number == 2627) 
                     {
-                        // Gérer ici le cas où le nom d'utilisateur est déjà présent
-                        // par exemple, afficher un message d'erreur ou effectuer une autre action appropriée
                         Console.WriteLine("Le nom d'utilisateur ou le pseudo est déjà utilisé.");
                     }
                     else
@@ -254,18 +250,17 @@ namespace GameLendXchange.DAO
                 }
             }
 
-            return null; // Return null if player not found or an error occurred.
+            return null; 
         }
 
         public static void AddBirthdayBonus(Player player)
         {
             if (player.DateOfBirth.Month == DateTime.Now.Month && player.DateOfBirth.Day == DateTime.Now.Day)
             {
-                // Vérifier si le bonus d'anniversaire n'a pas encore été reçu (non fonctionnel pour le moment)
                 if (!player.IsBirthdayBonusReceived)
                 {
                     player.Credit += 2;
-                    player.IsBirthdayBonusReceived = true; // Mettre à jour le champ pour indiquer que le bonus a été reçu
+                    player.IsBirthdayBonusReceived = true; 
                     
                     PlayerDB playerDB = new PlayerDB();
 

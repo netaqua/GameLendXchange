@@ -110,7 +110,7 @@ namespace GameLendXchange.DAO
                                     IdBooking = reader.GetInt32(reader.GetOrdinal("idBooking")),
                                     BookingDate = reader.GetDateTime(reader.GetOrdinal("bookingDate")),
                                     Player = player,
-                                    VideoGame = game, // Assign the game object to the Booking.VideoGame property.
+                                    VideoGame = game, 
                                 };
                                 bookings.Add(booking);
                             }
@@ -130,7 +130,6 @@ namespace GameLendXchange.DAO
 
             if (player == null)
             {
-                // Player not found, handle the situation accordingly.
                 return bookings;
             }
 
@@ -157,7 +156,7 @@ namespace GameLendXchange.DAO
                                     IdBooking = reader.GetInt32(reader.GetOrdinal("idBooking")),
                                     BookingDate = reader.GetDateTime(reader.GetOrdinal("bookingDate")),
                                     Player = player,
-                                    VideoGame = game, // Assign the game object to the Booking.VideoGame property.
+                                    VideoGame = game, 
                                 };
                                 bookings.Add(booking);
                             }
@@ -205,10 +204,8 @@ namespace GameLendXchange.DAO
                     }
                 }
             }
-
             return bookings;
         }
-
     }
 }
 

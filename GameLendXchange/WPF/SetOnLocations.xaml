@@ -27,9 +27,9 @@
 
             <!-- Buttons -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-                <Button x:Name="backBtn" Content="Go Back" FontFamily="Verdana" FontSize="11" Background="GhostWhite" BorderBrush="#FBDA62" Height="34" Width="114" Click="backBtn_Click"/>
+                <Button x:Name="backBtn" Content="Retour à l'accueil" FontFamily="Verdana" FontSize="11" Background="GhostWhite" BorderBrush="#FBDA62" Height="34" Width="114" Click="backBtn_Click"/>
             </StackPanel>
-            <Label Grid.Column="1" Content="Dépot / Réservation" FontSize="23" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="288"/>
+            <Label Grid.Column="1" Content="Dépôt / Réservation" FontSize="23" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Width="288"/>
         </Grid>
 
         <DataGrid  Margin="10,99,309,46" x:Name="dgGame" AutoGenerateColumns="False" Grid.RowSpan="2">

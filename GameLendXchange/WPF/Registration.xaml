@@ -8,8 +8,6 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Registration" Background="#86c598">
 
-
-
     <Grid>
 
         <Grid.RowDefinitions>
@@ -26,22 +24,22 @@
         <Border Background="#F4F6EF" Padding="30" Grid.RowSpan="3">
             <StackPanel VerticalAlignment="Center">
                 <Image Source="../Pictures\Logo_nom_slogan.png" Width="271" Height="160"/>
-                <TextBlock Text="Only one step left!" TextAlignment="Center" FontWeight="SemiBold" FontSize="20" Foreground="Black" Height="41"/>
-                <TextBlock TextWrapping="Wrap" FontSize="16" TextAlignment="Center" Foreground="Black" Margin="0 20 0 20" Text="It should only take a couple of seconds"/>
+                <TextBlock Text="Plus qu'une étape!" TextAlignment="Center" FontWeight="SemiBold" FontSize="20" Foreground="Black" Height="41"/>
+                <TextBlock TextWrapping="Wrap" FontSize="16" TextAlignment="Center" Foreground="Black" Margin="0 20 0 20" Text="Cela devrait vous prendre quelques secondes"/>
                 <Image Source="../Pictures\flechepng.png" Height="70" Width="124"/>
             </StackPanel>
         </Border>
         <!-- Right Section -->
-        <Label Grid.Column="1" Content="Username" FontFamily="Georgia" FontSize="25" HorizontalAlignment="Left" Margin="54,31,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Grid.Column="1" Content="Password" FontFamily="Georgia" FontSize="25" HorizontalAlignment="Left" Margin="54,81,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Grid.Column="1" Content="Nom d'utilisateur" FontFamily="Georgia" FontSize="25" HorizontalAlignment="Left" Margin="54,31,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Grid.Column="1" Content="Mot de passe" FontFamily="Georgia" FontSize="25" HorizontalAlignment="Left" Margin="54,81,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Grid.Column="1" Content="Pseudo" FontFamily="Georgia" FontSize="25" HorizontalAlignment="Left" Margin="54,131,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Grid.Column="1" Content="Date of birth" FontFamily="Georgia" FontSize="25" HorizontalAlignment="Left" Margin="54,177,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <TextBox x:Name="usernameTextBox" Grid.Column="1" HorizontalAlignment="Left" FontFamily="Arial" FontSize="25" Margin="250,35,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="209"/>
-        <PasswordBox x:Name="passwordTextBox" Grid.Column="1" HorizontalAlignment="Left" FontFamily="Arial" FontSize="25" Margin="250,85,0,0" Grid.Row="1" VerticalAlignment="Top" Width="209"/>
-        <TextBox x:Name="pseudoTextBox" Grid.Column="1" HorizontalAlignment="Left" FontFamily="Arial" FontSize="25" Margin="250,135,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="209"/>
-        <DatePicker x:Name="dateOfBirthSelect" Grid.Column="1" HorizontalAlignment="Left" FontFamily="Arial" FontSize="17" Margin="250,184,0,0" Grid.Row="1" VerticalAlignment="Top" Width="209" Height="24" />
-        <Button x:Name="backButton" Grid.Column="1" Content="Go Back" FontFamily="Georgia" FontSize="16" Background="GhostWhite" BorderBrush="#FBDA62" HorizontalAlignment="Left" Height="40" Margin="54,265,0,0" Grid.Row="1" VerticalAlignment="Top" Width="150" Click="BackButton_Click"/>
-        <Button x:Name="registerButton" Grid.Column="1" Content="Register" FontFamily="Georgia" FontSize="16" Background="#FBDA62" BorderBrush="WhiteSmoke" FontWeight="Bold" HorizontalAlignment="Left" Height="40" Margin="280,265,0,0" Grid.Row="1" VerticalAlignment="Top" Width="150" Click="RegistrationBtn_Click"/>
+        <Label Grid.Column="1" Content="Date de naissance" FontFamily="Georgia" FontSize="25" HorizontalAlignment="Left" Margin="54,177,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <TextBox x:Name="usernameTextBox" Grid.Column="1" HorizontalAlignment="Left" FontFamily="Arial" FontSize="25" Margin="278,35,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="230"/>
+        <PasswordBox x:Name="passwordTextBox" Grid.Column="1" HorizontalAlignment="Left" FontFamily="Arial" FontSize="25" Margin="278,85,0,0" Grid.Row="1" VerticalAlignment="Top" Width="230"/>
+        <TextBox x:Name="pseudoTextBox" Grid.Column="1" HorizontalAlignment="Left" FontFamily="Arial" FontSize="25" Margin="278,135,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="230"/>
+        <DatePicker x:Name="dateOfBirthSelect" Grid.Column="1" HorizontalAlignment="Left" FontFamily="Arial" FontSize="17" Margin="278,184,0,0" Grid.Row="1" VerticalAlignment="Top" Width="230" Height="24" />
+        <Button x:Name="backButton" Grid.Column="1" Content="Retour" FontFamily="Georgia" FontSize="16" Background="GhostWhite" BorderBrush="#FBDA62" HorizontalAlignment="Left" Height="40" Margin="54,265,0,0" Grid.Row="1" VerticalAlignment="Top" Width="150" Click="BackButton_Click"/>
+        <Button x:Name="registerButton" Grid.Column="1" Content="S'inscrire" FontFamily="Georgia" FontSize="16" Background="#FBDA62" BorderBrush="WhiteSmoke" FontWeight="Bold" HorizontalAlignment="Left" Height="40" Margin="280,265,0,0" Grid.Row="1" VerticalAlignment="Top" Width="150" Click="RegistrationBtn_Click"/>
 
         <!-- Error Message -->
         <TextBlock x:Name="errorMessage" Grid.Column="1" FontFamily="Georgia" FontSize="16" Foreground="Red" Margin="10,0,10,0" Grid.Row="2" VerticalAlignment="Top" Height="32"/>

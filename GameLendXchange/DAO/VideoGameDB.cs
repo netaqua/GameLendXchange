@@ -129,8 +129,6 @@ namespace GameLendXchange.DAO
             return videoGames;
         }
 
-        /**************************************************** SORT BY CONSOLES *****************************************************/
-
         public List<VideoGame> SortByPlaystation()
         {
             List<VideoGame> videoGames = new List<VideoGame>();
@@ -200,8 +198,6 @@ namespace GameLendXchange.DAO
             return videoGames;
         }
 
-
-
         public VideoGame ReadById(int idGame)
         {
             VideoGame videoGame = null;
@@ -222,7 +218,6 @@ namespace GameLendXchange.DAO
                         {
                             if (reader.Read())
                             {
-                                // Créer un nouvel objet VideoGame avec les données de la base de données
                                 videoGame = new VideoGame
                                 {
                                     IdGame = Convert.ToInt32(reader["IdVideoGame"]),
@@ -237,7 +232,6 @@ namespace GameLendXchange.DAO
             }
             catch (Exception ex)
             {
-                // Gérer les erreurs de lecture de la base de données
                 Console.WriteLine("Erreur lors de la lecture du jeu : " + ex.Message);
             }
 
@@ -280,13 +274,12 @@ namespace GameLendXchange.DAO
                         {
                             while (reader.Read())
                             {
-                                // Créer un nouvel objet Booking avec les données de la base de données
                                 Booking booking = new Booking
                                 {
                                     IdBooking = Convert.ToInt32(reader["IdBooking"]),
                                     BookingDate = Convert.ToDateTime(reader["BookingDate"]),
                                     Player = Player.GetPlayerById(Convert.ToInt32(reader["IdPlayer"])),
-                                    VideoGame = VideoGame.GetGameById(idGame)
+                                    VideoGame = VideoGame.ReadId(idGame)
                                 };
 
                                 bookings.Add(booking);
@@ -297,7 +290,6 @@ namespace GameLendXchange.DAO
             }
             catch (Exception ex)
             {
-                // Gérer les erreurs de lecture de la base de données
                 Console.WriteLine("Erreur lors de la lecture des réservations : " + ex.Message);
             }
 
@@ -310,6 +302,5 @@ namespace GameLendXchange.DAO
             copyFind = copies.Find(c => c.Available == true);
             return copyFind;
         }
-
     }
 }

@@ -30,9 +30,8 @@
 
             <!-- Autres éléments -->
             <Image HorizontalAlignment="Left" Source="Pictures/Logo_nom_slogan.png" Height="59" Margin="10,6,0,0" VerticalAlignment="Top" Width="138"/>
-            <!--<DataGrid Name="dgGame" AutoGenerateColumns="True" Margin="114,95,37,0" ColumnWidth="*" VerticalAlignment="Top" Height="291"/>-->
 
-            <DataGrid Name="dgGame" AutoGenerateColumns="False" Margin="136,94,37,89" ColumnWidth="*">
+            <DataGrid Name="dgGame" AutoGenerateColumns="False" Margin="136,94,37,89" ColumnWidth="*" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding IdGame}" />
                     <DataGridTextColumn Header="Nom du jeu" Binding="{Binding Name}" />

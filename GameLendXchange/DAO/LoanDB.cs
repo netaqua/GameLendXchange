@@ -238,7 +238,5 @@ namespace GameLendXchange.DAO
             }
             return success;
         }
-
-
     }
 }

@@ -33,14 +33,10 @@ namespace GameLendXchange.WPF
             AccueilPlayerViewModel viewModel = new AccueilPlayerViewModel(p);
         }
 
-        // BOUTON DE RENVOI VERS L'ACCUEIL PLAYER //
-
          private void backBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AccueilPlayer(player));
         }
-
-        // CONFIGURATION DES COLONNES DU DATAGRID //
 
         private void ConfigureDataGridColumns()
         {
@@ -123,7 +119,7 @@ namespace GameLendXchange.WPF
                                     bool DelBook = selectedBooking.Delete();
                                     if(DelBook)
                                     {
-                                        validateMessage.Text = "Jeu directement emprunter par un joueur";
+                                        validateMessage.Text = "Votre jeu a directement été emprunté par un joueur";
                                         c.Borrow();
                                     }
                                     
@@ -157,9 +153,6 @@ namespace GameLendXchange.WPF
                 errorMessage.Text = "Veuillez sélectionner un jeu dans la liste.";
             }
         }
-
-
-
 
 
         // METHODE DE LOCATION D'UN JEU //
@@ -201,7 +194,7 @@ namespace GameLendXchange.WPF
                      }
                      else
                      {
-                         errorMessage.Text = "Pas assez de crédit pour le jeu";
+                         errorMessage.Text = "Pas assez de crédits pour le jeu";
                      }
                  }
                  else
@@ -215,11 +208,11 @@ namespace GameLendXchange.WPF
                      var succesBook = booking.Insert();
                      if (succesBook)
                      {
-                         errorMessage.Text = "Copie non dispo pour le moment, réservation réalisée";
+                         errorMessage.Text = "Copie non disponible pour le moment, réservation réalisée";
                      }
                      else
                      {
-                         errorMessage.Text = "Copie non dispo pour le moment, mais réservation impossible";
+                         errorMessage.Text = "Copie non disponible pour le moment, mais réservation impossible";
                      }
                  }
              }

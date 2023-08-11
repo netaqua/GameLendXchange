@@ -27,15 +27,13 @@
 
             <!-- Buttons -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-                <!-- LANCER VERS LA PAGE INFOGAME - LE PLAYER DEVRA CHOISIR L'ID DU JEU - LA COPIE SERA VERIFIEE EN DB-->
-                <!-- LANCER VERS UNE PAGE POUR ENREGISTRER UNE COPIE A LOUER (NOM JEU + CONSOLE) - COUT CREDIT DEFINI PAR L'ADMIN-->
-                <Button Content="Dépôt / Réservation  " Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" Width="150" Click="LocationsButton_Click"/>
+                <Button Content="Dépôt / Location  " Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" Width="150" Click="LocationsButton_Click"/>
                 <Button Content="Déconnexion" Margin="10" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62"  Width="90" Click="LogoutButton_Click"/>
             </StackPanel>
         </Grid>
 
         <!-- Game List -->
-        <DataGrid Name="dgGame" Grid.Row="1" AutoGenerateColumns="False" Margin="10,47,445,4" SelectionChanged="dgGame_SelectionChanged">
+        <DataGrid Name="dgGame" Grid.Row="1" AutoGenerateColumns="False" Margin="10,47,445,4" SelectionChanged="dgGame_SelectionChanged" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding IdGame}" />
                 <DataGridTextColumn Header="Nom du jeu" Binding="{Binding Name}" />
@@ -65,12 +63,6 @@
 
         <!-- Player Information -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
-            <!--StackPanel>
-            A VOIR SI ON GARDE, PLUS PROPRE SANS
-                <TextBlock x:Name="playerName" Text="{Binding PlayerName}" FontSize="20" FontWeight="Bold" Margin="0 0 0 5"/>
-                <TextBlock x:Name="playerPassword" Text="{Binding PlayerUsername}" FontSize="14" Margin="0 0 0 5"/>
-                <Button Content="Mettre à jour mes informations" FontFamily="Georgia" FontSize="13" Background="GhostWhite" BorderBrush="#FBDA62" Width="191" Click="EditPlayerButton_Click"/>
-            </StackPanel-->
             <StackPanel>
                 <TextBlock Text="Credit : " FontSize="20" FontWeight="Bold" Margin="0 0 0 5" TextAlignment="Right"/>
                 <TextBlock Text="Date d'enregistrement : " FontSize="20" FontWeight="Bold" Width="226" TextAlignment="Right"/>
@@ -82,6 +74,6 @@
         </StackPanel>
         <Label Content="Jeux" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="10,8,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Content="Réservations" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="540,72,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <Label Content="Jeux en location" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="541,225,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Historique de location" HorizontalAlignment="Left" FontSize="20" FontWeight="Bold" Margin="541,225,0,0" Grid.Row="1" VerticalAlignment="Top"/>
     </Grid>
 </Page>

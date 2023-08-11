@@ -13,7 +13,6 @@ namespace GameLendXchange.WPF.ViewModel
 
         public InfoGameViewModel(int gameId)
         {
-            // Fetch the game information based on the provided gameId
             VideoGame game = VideoGame.GetGameById(gameId);
             if (game != null)
             {
@@ -21,7 +20,6 @@ namespace GameLendXchange.WPF.ViewModel
                 CreditCost = game.CreditCost;
                 Console = game.Console;
 
-                // Populate the Copies and Bookings collections
                 foreach (Copy copy in game.Copies)
                 {
                     Copies.Add(copy);

@@ -70,19 +70,15 @@ namespace GameLendXchange.Classes
 
             if (videoGame != null)
             {
-                // Récupérer les copies associées au jeu
                 List<Copy> copies = Copy.GetCopiesByVideoGame(idGame);
                 videoGame.Copies = copies;
 
-                // Récupérer les réservations associées au jeu
                 List<Booking> bookings = SelectBooking(idGame);
                 videoGame.Bookings = bookings;
             }
 
             return videoGame;
         }
-
-
 
         public bool UpdateCreditCost(VideoGame videoGame)
         {
@@ -101,6 +97,5 @@ namespace GameLendXchange.Classes
             VideoGameDB db = new VideoGameDB();
             return db.CopyAvailable(copies);
         }
-
     }
 }

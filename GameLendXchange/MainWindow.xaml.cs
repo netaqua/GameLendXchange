@@ -29,25 +29,9 @@ namespace GameLendXchange
             ConfigureDataGridColumns();
         }
 
-        /*private void dgGame_SelectionChanged(object sender, SelectionChangedEventArgs e) CETTE FONCTION EST INUTILE EN VRAI UNE FOIS LA RECUPARATION DE TOUT LES JEUX. 
-        {
-            // Vérifiez s'il y a un élément sélectionné dans le DataGrid
-            if (dgGame.SelectedItem != null)
-            {
-                // Obtenez l'élément sélectionné
-                var selectedGame = dgGame.SelectedItem as VideoGame;
-
-                // Créez une instance de la page de destination et transmettez les informations
-                InfoGame destinationPage = new InfoGame(selectedGame);
-                MainFrame.Navigate(destinationPage);
-            }
-        }*/
-
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            // string buttonContent = button.Content.ToString(); utilisation du name plutôt que du content car nous n'en avions pas défini
             string buttonContent = button.Name.ToString();
 
             switch (buttonContent)
@@ -84,7 +68,7 @@ namespace GameLendXchange
         private void ConfigureDataGridColumns()
         {
             
-            dgGame.Columns.Clear(); // Efface toutes les colonnes existantes
+            dgGame.Columns.Clear(); 
 
             // Colonne pour l'ID du jeu
             DataGridTextColumn idColumn = new DataGridTextColumn();
@@ -112,9 +96,6 @@ namespace GameLendXchange
 
             List<VideoGame> videoGames = VideoGame.GetGames();
             dgGame.ItemsSource = videoGames;
-
-
         }
-
     }
 }

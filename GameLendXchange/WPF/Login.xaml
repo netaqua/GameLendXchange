@@ -21,9 +21,6 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Upper section -->
-
-        <!-- Rectangle -->
         <Rectangle Height="91" Stroke="Black" Opacity="2" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,0,-2,0">
             <Rectangle.Fill>
                 <SolidColorBrush Color="#f4f6ef" />
@@ -35,7 +32,7 @@
         <TextBox x:Name="usernameTextBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="364,75,0,0" Grid.Row="2" FontSize="30" TextWrapping="Wrap" VerticalAlignment="Top" Width="287" RenderTransformOrigin="0.263,0.573"/>
         <PasswordBox x:Name="passwordTextBox" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="364,156,0,0" Grid.Row="2" FontSize="30" VerticalAlignment="Top" Width="289" />
         <Button x:Name="backBtn" Grid.Column="1" Content="Go Back" FontFamily="Verdana" FontSize="11" Background="GhostWhite" BorderBrush="#FBDA62" HorizontalAlignment="Left" Height="34" Margin="849,33,0,0" VerticalAlignment="Top" Width="114" Click="backBtn_Click"/>
-        <Button x:Name="LoginBtn" Grid.Column="1" FontFamily="Verdana" FontSize="11" Background="#FBDA62" BorderBrush="WhiteSmoke" Content="Login" FontWeight="Black" HorizontalAlignment="Left" Margin="166,265,0,0" Grid.Row="2" VerticalAlignment="Top" Height="40" Width="488" Click="LoginBtn_Click"/>
+        <Button x:Name="LoginBtn" Grid.Column="1" FontFamily="Verdana" FontSize="11" Background="#FBDA62" BorderBrush="WhiteSmoke" Content="Se conecter" FontWeight="Black" HorizontalAlignment="Left" Margin="166,265,0,0" Grid.Row="2" VerticalAlignment="Top" Height="40" Width="488" Click="LoginBtn_Click"/>
         <Image Source="../Pictures\Logo_nom_slogan.png" Grid.ColumnSpan="2" Margin="-264,10,592,19" />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="356,0,0,0" FontFamily="Georgia" Text="It's time to log" TextAlignment="Center" FontWeight="SemiBold" FontSize="30" Foreground="Black" Width="234" Grid.Column="1"/>
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Georgia" TextAlignment="Center" FontWeight="SemiBold" FontSize="30" Foreground="Black" Width="234" Grid.Column="1" Grid.Row="2" Margin="338,2,0,0"><Run Language="fr-fr" Text="Connexion"/></TextBlock>

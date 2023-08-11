@@ -25,27 +25,34 @@ namespace GameLendXchange.WPF
 
         private void RegistrationBtn_Click(object sender, RoutedEventArgs e)
         {
-            Player p = new Player();
-            p.Username = usernameTextBox.Text;
-            p.Password = passwordTextBox.Password;
-            p.DateOfBirth = dateOfBirthSelect.SelectedDate.Value;
-            p.Pseudo = pseudoTextBox.Text;
-            p.RegistrationDate = DateTime.Now;
-
-            bool success = p.Insert();
-
-            if (success)
+            if (string.IsNullOrWhiteSpace(usernameTextBox.Text) || string.IsNullOrWhiteSpace(passwordTextBox.Password) || string.IsNullOrWhiteSpace(pseudoTextBox.Text) || !dateOfBirthSelect.SelectedDate.HasValue)
             {
-                NavigationService.Navigate(new Login());
-
-                ClearFields();
-
-                errorMessage.Text = string.Empty;
+                errorMessage.Text = "Merci de remplir tous les champs";
+                return;
             }
             else
             {
-                // Afficher un message d'erreur
-                errorMessage.Text = "Erreur lors de la création du joueur. Veuillez vérifier vos informations et réessayer.";
+                Player p = new Player();
+                p.Username = usernameTextBox.Text;
+                p.Password = passwordTextBox.Password;
+                p.DateOfBirth = dateOfBirthSelect.SelectedDate.Value;
+                p.Pseudo = pseudoTextBox.Text;
+                p.RegistrationDate = DateTime.Now;
+
+                bool success = p.Insert();
+
+                if (success)
+                {
+                    NavigationService.Navigate(new Login());
+
+                    ClearFields();
+
+                    errorMessage.Text = string.Empty;
+                }
+                else
+                {
+                    errorMessage.Text = "Erreur lors de la création du joueur. Veuillez vérifier vos informations.";
+                }
             }
         }
 
@@ -58,7 +65,6 @@ namespace GameLendXchange.WPF
 
         private void ClearFields()
         {
-            // Effacer les champs de saisie
             usernameTextBox.Text = string.Empty;
             passwordTextBox.Password = string.Empty;
             dateOfBirthSelect.SelectedDate = null;
