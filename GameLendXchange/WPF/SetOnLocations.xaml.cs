@@ -67,6 +67,12 @@ namespace GameLendXchange.WPF
             dgGame.ItemsSource = videoGames;
         }
 
+        public void ClearText()
+        {
+            validateMessage.Text = "";
+            errorMessage.Text = "";
+        }
+
         // METHODE DE DEPÔT D'UN JEU //
 
         private void DepositBtn_Click(object sender, RoutedEventArgs e)
@@ -119,6 +125,7 @@ namespace GameLendXchange.WPF
                                     bool DelBook = selectedBooking.Delete();
                                     if(DelBook)
                                     {
+                                        ClearText();
                                         validateMessage.Text = "Votre jeu a directement été emprunté par un joueur";
                                         c.Borrow();
                                     }
@@ -127,6 +134,7 @@ namespace GameLendXchange.WPF
                             }
                             else
                             {
+                                ClearText();
                                 errorMessage.Text = "L'emprunteur n'a pas assez de credit";
                             }
 
@@ -134,22 +142,26 @@ namespace GameLendXchange.WPF
                         }
                         else
                         {
+                            ClearText();
                             validateMessage.Text = "Jeu déposé avec succès";
                             errorMessage.Text = string.Empty;
                         }
                     }
                     else
                     {
+                        ClearText();
                         errorMessage.Text = "Erreur lors de l'insertion d'une copie. Veuillez vérifier les informations et réessayez.";
                     }
                 }
                 else
                 {
+                    ClearText();
                     errorMessage.Text = "Erreur";
                 }
             }
             else
             {
+                ClearText();
                 errorMessage.Text = "Veuillez sélectionner un jeu dans la liste.";
             }
         }
@@ -185,6 +197,7 @@ namespace GameLendXchange.WPF
                              loan.insert();
                              loan.Lender.Credit += copieFind.VideoGame.CreditCost;
                              var succesP2 = player.Update(loan.Lender);
+                             ClearText();
                              validateMessage.Text = "Location réalisé";
                          }
                          else
@@ -194,7 +207,8 @@ namespace GameLendXchange.WPF
                      }
                      else
                      {
-                         errorMessage.Text = "Pas assez de crédits pour le jeu";
+                        ClearText();
+                        errorMessage.Text = "Pas assez de crédits pour le jeu";
                      }
                  }
                  else
@@ -208,11 +222,13 @@ namespace GameLendXchange.WPF
                      var succesBook = booking.Insert();
                      if (succesBook)
                      {
-                         errorMessage.Text = "Copie non disponible pour le moment, réservation réalisée";
+                        ClearText();
+                        errorMessage.Text = "Copie non disponible pour le moment, réservation réalisée";
                      }
                      else
                      {
-                         errorMessage.Text = "Copie non disponible pour le moment, mais réservation impossible";
+                        ClearText();
+                        errorMessage.Text = "Copie non disponible pour le moment, mais réservation impossible";
                      }
                  }
              }

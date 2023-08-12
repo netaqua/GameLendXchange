@@ -196,7 +196,7 @@ namespace GameLendXchange.WPF
                             int cId = selectedLoan.IdCopy;
                             Copy c = new Copy();
                             c.ReleaseCopy(cId);
-                            MessageBox.Show("Location stoppée ! (actualiser la page)");
+                            MessageBox.Show("Location stoppée !");
                         }
                         else
                         {
