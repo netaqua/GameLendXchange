@@ -25,7 +25,7 @@ namespace GameLendXchange.DAO
             bool success = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"INSERT INTO dbo.Booking(bookingDate, idPlayer, idVideoGame) VALUES('{b.BookingDate}',{b.Player.IdUser} ,{b.VideoGame.IdGame})", connection);
+                SqlCommand cmd = new SqlCommand($"INSERT INTO dbo.Booking(bookingDate, idPlayer, idVideoGame) VALUES('{b.BookingDate:yyyy-MM-dd}',{b.Player.IdUser} ,{b.VideoGame.IdGame})", connection);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
                 success = res > 0;
@@ -61,7 +61,7 @@ namespace GameLendXchange.DAO
             bool success = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand($"UPDATE dbo.Loan SET bookingDate = {b.BookingDate}, idPlayer = {b.Player.IdUser}, idVideoGame = {b.VideoGame.IdGame}", connection);
+                SqlCommand cmd = new SqlCommand($"UPDATE dbo.Loan SET bookingDate = {b.BookingDate:yyyy-MM-dd}, idPlayer = {b.Player.IdUser}, idVideoGame = {b.VideoGame.IdGame}", connection);
                 connection.Open();
                 int res = cmd.ExecuteNonQuery();
                 success = res > 0;
