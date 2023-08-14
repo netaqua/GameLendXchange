@@ -135,7 +135,7 @@ namespace GameLendXchange.WPF
                             else
                             {
                                 ClearText();
-                                errorMessage.Text = "L'emprunteur n'a pas assez de credit";
+                                validateMessage.Text = "Copie déposée, mais l'emprunteur sur réservation n'a pas assez de credit pour louer le jeu";
                             }
 
 
